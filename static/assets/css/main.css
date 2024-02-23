@@ -1,0 +1,81 @@
+body {
+    background-color: #cacaca;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.container {
+    margin-top: 80px;            
+}
+
+h4 {
+    color: #1d6d3e;
+}
+
+.card {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;            
+}
+
+label {    
+    color: #515e6c;
+    font-weight: 600;
+}
+
+input.form-control {
+    border: 1px solid #ced4da;
+}
+
+button.btn-primary {    
+    background-color: #0e8939;
+    border: 1px solid #034f03;
+    text-align: left;
+    width: 140px;
+    border: #656765;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+button.btn-primary:hover {
+    background-color: #0d7e34;
+    border: 1px solid #023e02;
+}
+
+.section-icon {
+    font-size: 24px;
+    margin-right: 5px;
+    margin-left:5px;
+}
+.titulo {   
+    text-transform: uppercase; 
+    font-size: 16px;
+    color: #199f5c;
+    border-bottom: 4px solid #323d48;              
+    margin-bottom: 0px;
+    padding: 10px;
+    font-weight: 700;
+    text-align: left;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000; /* Ajuste o valor de z-index conforme necessário para sobrepor outros elementos */
+}
+.titulo img {
+    width: 30px;
+    margin-right: 5px;
+    margin-left: 15px;
+}
+
+
+.subtitulo {
+    color: #515e6c;
+    font-size: 24px;
+    padding-top: 0px;
+    padding-bottom:10px;
+    font-weight: 500;
+    text-align: center; 
+}
+.container .card form input:focus {
+    background:#4bb1b9;
+}

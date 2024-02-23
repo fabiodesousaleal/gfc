@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Ficha Catalográfica - ABNT</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+            margin: 20px;
+        }
+        
+        h1 {
+            text-align: center;
+            font-size: 16px;
+        }
+        
+        p {
+            margin-bottom: 5px;
+            text-align: justify;
+        }
+        
+        .negrito {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Ficha Catalográfica - ABNT</h1>
+    <p class="negrito">{{ dados['autor'] }}</p>
+    <p class="negrito">{{ dados['titulo'] }}</p>
+    <p>{{ dados['ano'] }}</p>
+    <p>{{ dados['editora'] }}</p>
+    <p>{{ dados['cidade'] }}</p>
+</body>
+</html>

@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Formulário Estilizado</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+    <link rel="stylesheet" href="/static/assets/css/main.css" type="text/css">
+</head>
+<body>
+    <div class="titulo bg-dark">
+        <img src="/static/assets/img/UFNT_brasao.png">
+        Universidade Federal do Norte do Tocantins
+    </div>
+<div class="container">    
+    <div class="subtitulo">
+        <span>Gerador de Ficha Catalográfica - GFC</span>
+        <hr style="width: 50%;">
+    </div>
+    <form action="/gerar_ficha" method="post">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <h4 class="text-left"><i class="fas fa-user section-icon"></i>Passo 1 - Autor</h4>
+                    <div class="form-group">
+                        <label for="autor-nome">Autor: <b style="color: red;">*</b></label><br>
+                        <input class="form-control" type="text" id="autor-sobrenome" name="autor-nome" value="Fábio" required maxlength="50"><br>
+                
+                        <label for="autor-sobrenome">Autor - Sobrenome: <b style="color: red;">*</b></label><br>
+                        <input class="form-control" type="text" id="autor-sobrenome" name="autor-sobrenome" value="de Sousa Leal" required maxlength="100"><br>
+                    </div>
+                    <!-- Adicione mais campos conforme necessário para a seção de Dados Pessoais -->
+                </div>
+
+                <div class="card">
+                    <h4 class="text-left"><i class="fas fa-file section-icon"></i> Passo 2 - Dados do Trabalho</h4>
+                    <div class="form-group">
+                        <label for="titulo-trabalho">Título do Trabalho: <b style="color: red;">*</b></label><br>
+                        <input class="form-control" type="text" id="titulo-trabalho" name="titulo-trabalho" value="IPv6" required maxlength="255"><br>
+
+                        <label for="titulo-subtitulo">Subtitulo do Trabalho: <b style="color: red;">*</b></label><br>
+                        <input class="form-control" type="text" id="titulo-subtitulo" name="titulo-subtitulo" value="" required maxlength="255"><br>
+                        
+                        <label for="folhas">Folhas: <b style="color: red;">*</b></label><br>
+                        <input class="form-control" type="number" min="1" max="999" maxlength="3" id="folhas" name="folhas" class="form-control">
+                        
+                        <label for="campus">Campus: <b style="color: red;">*</b></label><br>
+                        <select id="campus" name="campus" required="required" class=" form-control" >
+                        </option>
+                            <option value="" selected="selected">---- Selecione o campus ----</option>  
+                            <option value="Araguaína">Araguaína</option>  
+                            <option value="Tocantinopolis">Tocantinopolis</option>    
+                        </select>
+                        <label for="curso">Curso: <b style="color: red;">*</b></label>
+                        <select id="curso" name="curso" required="required" class="form-control" >
+                            
+                            <option value="" selected="selected">---- Selecione o programa ----</option>
+                            <option value="1">Administração</option>
+                            <option value="2">Agronomia</option>
+                            <option value="3">Arquitetura e Urbanismo</option>
+                            <option value="4">Teatro</option>
+                            <option value="5">Artes - Parfor</option>
+                            <option value="6">Biologia</option>
+                            <option value="7">Biologia - Parfor</option>
+                            <option value="8">Biologia EAD</option>
+                            <option value="9">Ciências Biológicas</option>
+                            <option value="10">Ciências Biológicas - Parfor</option>
+                            <option value="11">Ciências Contábeis</option>
+                            <option value="12">Ciências da Computação</option>
+                            <option value="13">Ciências Econômicas</option>
+                            <option value="14">Ciências Sociais</option>
+                            <option value="15">Jornalismo</option>
+                            <option value="16">Direito</option>
+                            <option value="17">Educação Física - Parfor</option>
+                            <option value="18">Enfermagem</option>
+                            <option value="19">Engenharia Ambiental</option>
+                            <option value="20">Engenharia Civil</option>
+                            <option value="21">Engenharia de Alimentos</option>
+                            <option value="22">Engenharia de Bioprocessos e Biotecnologia</option>
+                            <option value="23">Engenharia Elétrica</option>
+                            <option value="24">Engenharia Florestal</option>
+                            <option value="25">Filosofia</option>
+                            <option value="26">Física</option>
+                            <option value="27">Física EAD</option>
+                            <option value="28">Geografia</option>
+                            <option value="29">Geografia - Parfor</option>
+                            <option value="30">Gestão de Cooperativas</option>
+                            <option value="31">Gestão de Turismo</option>
+                            <option value="32">História</option>
+                            <option value="33">História - Parfor</option>
+                            <option value="34">Informática - Parfor</option>
+                            <option value="35">Letras - Inglês</option>
+                            <option value="36">Letras - Parfor</option>
+                            <option value="37">Letras - Português</option>
+                            <option value="38">Logística</option>
+                            <option value="39">Matemática</option>
+                            <option value="40">Matemática - Parfor</option>
+                            <option value="41">Medicina</option>
+                            <option value="42">Medicina Veterinária</option>
+                            <option value="43">Nutrição</option>
+                            <option value="44">Pedagogia</option>
+                            <option value="45">Pedagogia - Parfor</option>
+                            <option value="46">Química</option>
+                            <option value="47">Quimica Ambiental</option>
+                            <option value="48">Química EAD</option>
+                            <option value="49">Serviço Social</option>
+                            <option value="50">Zootecnia</option>
+                            <option value="51">Letras - Língua Inglesa e Literaturas</option>
+                            <option value="52">Letras - Língua Portuguesa e Literaturas</option>
+                            <option value="53">Pós-Graduação Administração Pública com Ênfase em Gestão Universitária</option>
+                            <option value="54">MBA em Perícia, Auditoria e Gestão Ambiental</option>
+                            <option value="55">MBA em Agronegócio</option>
+                            <option value="56">MBA em Gerenciamento de Projetos</option>
+                            <option value="57">MBA em Gestão de Operações e Logística</option>
+                            <option value="58">MBA em Gestão de Pessoas</option>
+                            <option value="59">MBA em Gestão de Pessoas e Coaching</option>
+                            <option value="60">MBA em Gestão de Projetos e Cidades</option>
+                            <option value="61">MBA em Gestão Empresarial</option>
+                            <option value="62">MBA em Gestão Financeira e Orçamentária</option>
+                            <option value="63">MBA em Liderança e Formação de Gestores</option>
+                            <option value="64">MBA em Marketing Estratégico</option>
+                            <option value="65">MBA Executivo em Logística e Produção Sustentável</option>
+                            <option value="66">Pós-Graduação Coordenação Pedagógica</option>
+                            <option value="67">Pós-Graduação em Direito e Processo Administrativo</option>
+                            <option value="68">Pós-Graduação em Direito e Processo Constitucional</option>
+                            <option value="69">Pós-Graduação em Direito e Processo do Trabalho</option>
+                            <option value="70">Pós-Graduação em Docência na Educação Infantil</option>
+                            <option value="71">Pós-Graduação em Ensino de Língua Inglesa</option>
+                            <option value="72">Pós-Graduação em Gerontologia</option>
+                            <option value="73">Pós-Graduação em Gestão Pública e Sociedade</option>
+                            <option value="74">Pós-Graduação em Leitura e Produção Escrita</option>
+                            <option value="75">Pós-Graduação em Responsabilidade Social</option>
+                            <option value="76">Pós-Graduação em Urgências e Emergências para Enfermeiros</option>
+                            <option value="77">Segurança Pública: teoria e prática no gerenciamento da Polícia Comunitária no Estado do Tocantins</option>
+                            <option value="78">Pós-Graduação (Mestrado) Profissional em Letras Ensino de Língua e Literatura</option>
+                            <option value="79">Pós-Graduação (Mestrado) em Agroenergia</option>
+                            <option value="80">Pós-Graduação (Mestrado) em Biotecnologia</option>
+                            <option value="81">Pós-Graduação (Mestrado) em Ciência Animal Tropical</option>
+                            <option value="82">Pós-Graduação (Mestrado) em Ciência e Tecnologia de Alimentos</option>
+                            <option value="83">Pós-Graduação (Mestrado) em Ciências do Ambiente</option>
+                            <option value="84">Pós-Graduação (Mestrado) em Desenvolvimento Regional</option>
+                            <option value="85">Pós-Graduação (Mestrado) em Ecologia de Ecótonos</option>
+                            <option value="86">Pós-Graduação (Mestrado) em Educação</option>
+                            <option value="87">Pós-Graduação (Mestrado) Profissional em Ensino de História</option>
+                            <option value="88">Pós-Graduação (Mestrado) em Geografia</option>
+                            <option value="89">Pós-Graduação (Mestrado) em Modelagem Computacional de Sistemas</option>
+                            <option value="90">Pós-Graduação (Mestrado) em Prestação Jurisdicional em Direitos Humanos</option>
+                            <option value="91">Pós-Graduação (Mestrado) em Produção Vegetal</option>
+                            <option value="92">Pós-Graduação (Mestrado) Profissional em Engenharia Ambiental</option>
+                            <option value="93">Pós-Graduação (Mestrado) Profissional em Gestão de Políticas Públicas</option>
+                            <option value="94">Pós-Graduação (Mestrado) Profissional em Matemática</option>
+                            <option value="95">Pós-Graduação (Doutorado) em Ciência Animal Tropical</option>
+                            <option value="96">Pós-Graduação (Doutorado) em Produção Vegetal</option>
+                            <option value="97">Pós-Graduação (Doutorado) em Biodiversidade e Biotecnologia</option>
+                            <option value="98">Pós-Graduação (Doutorado) em Ciências do Ambiente</option>
+                            <option value="99">Pós-Graduação (Mestrado) em Ciências da Saúde</option>
+                            <option value="100">Educação Física</option>
+                            <option value="101">Educação do Campo</option>
+                            <option value="102">Geografia</option>
+                            <option value="103">Relações Internacionais</option>
+                            <option value="104">Letras - Libras</option>
+                            <option value="105">Psicologia</option>
+                            <option value="106">Pós-Graduação (Mestrado) em Engenharia Ambiental</option>
+                            <option value="107">Pós-Graduação (Mestrado) em Ciências Florestais</option>
+                            <option value="108">Pós-Graduação (Mestrado) em Letras Ensino de Língua e Literatura</option>
+                            <option value="109">Pós-Graduação (Doutorado) em Letras Ensino de Língua e Literatura</option>
+                            <option value="110">Pós-Graduação (Mestrado) em Ciências Florestais e Ambientais</option>
+                            <option value="111">Pós-Graduação em Culturas e História dos Povos Indígenas</option>
+                            <option value="112">Pós-Graduação em Produção de Ruminante</option>
+                            <option value="114">Pós-Graduação em EAD em Gênero e Diversidade na Escola</option>
+                            <option value="115">Pós-Graduação ( Mestrado) em Comunicação e Sociedade</option>
+                            <option value="116">Pós-Graduação (Mestrado) em Estudo de Cultura e Território</option>
+                            <option value="117">Pós-Graduação (Mestrado) Profissional Nacional em Ensino de Física</option>
+                            <option value="118">Pós-Graduação (Mestrado) em Sanidade Animal e Saúde Pública nos Trópicos</option>
+                            <option value="119">Pós-Graduação (Mestrado) em Letras</option>
+                            <option value="120">Pós-Graduação Lato Sensu em Ensino de Comunicação/Jornalismo: Temas Contemporâneos</option>
+                            <option value="121">Turismo Patrimonial e Socioambiental</option>
+                            <option value="122">Pós-Graduação (Mestrado) em Ensino em Ciências e Saúde</option>
+                            <option value="123">Pós-Graduação (Mestrado) em Biodiversidade, Ecologia e Conservação</option>
+                            <option value="124">Pós-Graduação (Mestrado) Profissional em Educação</option>
+                            <option value="125">Administração Pública (EaD)</option>
+                            <option value="126">Letras - Libras Parfor</option>
+                            <option value="127">Pós-Graduação (Mestrado) em Demandas Populares e Dinâmicas Regionais</option>
+                            <option value="128">Pós-Graduação em Serviço Social e Política Social</option>
+                            <option value="129">Pós-Graduação (Mestrado) em Química</option>
+                            <option value="130">Pós-Graduação (Mestrado) Profissional em Administração Pública em Rede Nacional (PROFIAP)</option>
+                            <option value="131">Pós-Graduação (Mestrado) Profissional em Ciências da Saúde</option>
+                            <option value="132">Pós-Graduação (Mestrado) Profissional em Filosofia</option>
+                            <option value="133">Pós-Graduação (Doutorado) em Desenvolvimento Regional</option>
+                            <option value="134">Pós-Graduação (Mestrado) Profissional em Propriedade Intelectual e Transferência de Tecnologia para Inovação</option>
+                            <option value="135">Pós-Graduação em Sistemas de Apoio à Decisão</option>
+                            <option value="136">Pós-Graduação (Mestrado) em Ensino de Ciências e Matemática</option>
+                            <option value="137">Pós-Graduação em Gestão e Organização do Trabalho Escolar</option>
+                            <option value="138">Pós-Graduação em Residência Médica</option>
+                            <option value="139">Pós-Graduação (Mestrado) em Serviço Social</option>
+                            <option value="140">Pós-Graduação em Transtorno do Espectro Autista – TEA no Âmbito das Tecnologias Digitais de Informação e Comunicação - TDIC</option>
+                            <option value="141">Pós-Graduação (Mestrado) Profissional em História das Populações Amazônicas (PPGHSPAM)</option>
+                            <option value="142">Matemática EAD</option>
+                            <option value="143">Mestrado Profissional em Saúde da Família</option>
+                            <option value="144">Especialização em Política e Gestão em Segurança Pública</option>
+                            <option value="146">Licenciatura em Música</option>
+                        </select>
+
+                        <label for="tipo-trabalho">Tipo Trabalho: <b style="color: red;">*</b></label>
+                        <select id="tipo-trabalho" name="tipo-trabalho" required="required" class=" form-control">
+                            <option value="" selected="selected">--- Selecione o tipo de trabalho ---</option>
+                            <option value="1">Tese (Doutorado)</option>
+                            <option value="2">Dissertação (Mestrado Acadêmico)</option>
+                            <option value="3">Dissertação (Mestrado Profissional)</option>
+                            <option value="4">Relatório de Pós-Doutorado</option>
+                            <option value="5">Monografia Graduação</option>   
+                            <option value="6">Monografia de Especialização</option>
+                            <option value="7">Relatório Técnico (Mestrado Profissional)</option>
+                            <option value="8">Artigo de Graduação</option>
+                            <option value="9">Artigo de Especialização</option>
+                            <option value="10">Relatório de Graduação</option>
+                        </select>
+
+                        <label for="ano">Ano: <b style="color: red;">*</b></label>        
+                        <select id="ano" name="ano" class="form-control" required>
+                            <option value="2003">2003</option>
+                            <option value="2004">2004</option>
+                            <option value="2005">2005</option>
+                            <option value="2006">2006</option>
+                            <option value="2007">2007</option>
+                            <option value="2008">2008</option>
+                            <option value="2009">2009</option>
+                            <option value="2010">2010</option>
+                            <option value="2011">2011</option>
+                            <option value="2012">2012</option>
+                            <option value="2013">2013</option>
+                            <option value="2014">2014</option>
+                            <option value="2015">2015</option>
+                            <option value="2016">2016</option>
+                            <option value="2017">2017</option>
+                            <option value="2018">2018</option>
+                            <option value="2019">2019</option>
+                            <option value="2020">2020</option>
+                            <option value="2021">2021</option>
+                            <option value="2022">2022</option>
+                            <option value="2023">2023</option>
+                            <option value="2024" selected="selected">2024</option>
+                            <option value="2025">2025</option>
+                        </select>
+                    </div>              
+                </div>
+                <div class="card">
+                    <h4 class="text-left"><i class="fas fa-chalkboard-teacher section-icon"></i> Passo 3 - Assuntos</h4>
+                    <div class="form-group">
+                        <label for="assunto1">Assunto 1:  <b style="color: red;">*</b></label>
+                        <input type="text" class="form-control" name="assunto1" id="assunto1" placeholder="Digite o assunto 1" maxlength="255" required>                        
+
+                        <label for="assunto2">Assunto 2:</label>
+                        <input type="text" class="form-control" name="assunto2" id="assunto2" placeholder="Digite o assunto 2" maxlength="255">
+
+                        <label for="assunto3">Assunto 3:</label>
+                        <input type="text" class="form-control" name="assunto3" id="assunto3" placeholder="Digite o assunto 3" maxlength="255">
+
+                        <label for="assunto4">Assunto 4:</label>
+                        <input type="text" class="form-control" name="assunto4" id="assunto4" placeholder="Digite o assunto 4" maxlength="255">
+
+                        <label for="assunto5">Assunto 5:</label>
+                        <input type="text" class="form-control" name="assunto5" id="assunto5" placeholder="Digite o assunto 5" maxlength="255">                        
+                        
+                    </div>
+                    <!-- Adicione mais campos conforme necessário para a seção de Dados dos Orientadores -->
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="card">
+                    <h4 class="text-left"><i class="fas fa-chalkboard-teacher section-icon"></i> Passo 4 - Dados dos Orientadores</h4>
+                    <div class="form-group">
+
+                        <label for="orientador-nome">Orientador - Nome: <b style="color: red;">*</b></label>
+                        <input type="text" class="form-control" name="orientador-nome" id="orientador-nome" placeholder="Digite o nome do orientador" required maxlength="50">
+
+                        <label for="orientador-sobrenome">Orientador - Sobrenome: <b style="color: red;">*</b></label>
+                        <input type="text" class="form-control" name="orientador-sobrenome" id="orientador-sobrenome" placeholder="Digite o sobrenome do orientador" required maxlength="100">
+                        
+                        <label for="corientador-nome">Coorientador - Nome:</label>                        
+                        <input type="text" class="form-control" name="coorientador-nome" id="coorientador-nome" placeholder="Digite o nome do coorientador" maxlength="50">
+                        
+                        <label for="coorientador-sobrenome">Coorientador - Sobrenome:</label>
+                        <input type="text" class="form-control" name="coorientador-sobrenome" id="coorientador-sobrenome" placeholder="Digite o sobrenome do coorientador" maxlength="100">
+                    </div>
+                    <!-- Adicione mais campos conforme necessário para a seção de Dados dos Orientadores -->
+                </div>
+
+                <div class="card">
+                    <h4 class="text-left"><i class="fas fa-stream section-icon"></i></i>Passo 5 - Configuração da Ficha</h4>
+                    <div class="form-group">                        
+                        <label for="tipo-arquivo">Tipo Fonte:</label><br>
+
+                        <input type="radio" id="tipo-fonte-arial" name="tipo-fonte" value="Arial" checked>
+
+                        <label for="tipo-fonte-arial" style="font-weight:normal;">Arial</label><br>
+
+                        <input type="radio" id="tipo-fonte-times" name="tipo-fonte" value="Times New Roman">
+
+                        <label for="tipo-fonte-times" style="font-weight:normal;">Times New Roman</label><br>
+
+                        <label for="tipo-arquivo">Tipo Arquivo:</label><br>
+                        
+                        <input type="radio" id="tipo-arquivo-img" name="tipo-arquivo" value="img">
+
+                        <label for="tipo-arquivo-img" style="font-weight:normal;">Imagem</label><br>
+                        
+                        <input type="radio" id="tipo-arquivo-pdf" name="tipo-arquivo" value="pdf" checked>
+                        <label for="tipo-arquivo-pdf" style="font-weight:normal;">PDF</label><br>                           
+                    </div>
+                    <!-- Adicione mais campos conforme necessário para a seção de Dados da Saída de Arquivo -->
+                </div>                
+                <div class="card">
+                    <h4 class="text-left"><i class="fas fa-chalkboard-teacher section-icon"></i> Passo 6 - Impressão</h4>
+                    <div class="form-group">                        
+                        <button type="submit" class="btn btn-primary btn-block"><i class="fas fa-file-alt section-icon"></i></i>Gerar Ficha</button>                       
+                    </div>
+                    <!-- Adicione mais campos conforme necessário para a seção de Dados dos Orientadores -->
+                </div>
+            </div>
+        </div>        
+    </form>
+</div>
+<footer class="bg-dark text-light text-center py-1">
+    <div class="container">
+      <p>2024 Divisão de Sistemas - UFNT. Todos os direitos reservados.</br>
+        Versão da Aplicação: 1.0.0</p>
+    </div>
+  </footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.mi
