@@ -1,7 +1,4 @@
-# REQUERIMENTOS
-    Python
-    Linux - Ubuntu
-## 1 INTRODUÇÃO
+# 1 INTRODUÇÃO
     Esse sistema gera uma ficha catalográfica com dados de entrada do usuário
 ## 2 REQUERIMENTOS
     2.1 Python
@@ -21,7 +18,7 @@
     pip install pdf2image
 ### 3.4 - poppler
     pip install poppler-utils
-### 4 - Iniciar o flask
+## 4 - Iniciar o flask
     python3 app.py
 
 
