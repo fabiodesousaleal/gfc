@@ -24,7 +24,6 @@
 # 5 - ACESSANDO
     localhost:5000
 
-
 # 6 - SUBINDO COM DOCKER   
     clone do projeto
     make build

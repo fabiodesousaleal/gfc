@@ -18,7 +18,7 @@
     <div class="subtitulo">
         Gerador de Ficha Catalográfica - GFC
     </div>
-    <form action="/cutter" method="post">
+    <form action="/ficha/cutter" method="post">
         <div class="row">
             <div class="col-md-6">
                 <div class="card">
@@ -26,10 +26,10 @@
                     <div class="form-group">                       
                 
                         <label for="autor-sobrenome">Sobrenome:</label><br>
-                        <input class="form-control" type="text" id="sobrenome" name="sobrenome" value="" required><br>
+                        <input class="form-control" type="text" id="sobrenome" name="sobrenome" value="" placeholder="Sobrenome" required><br>
                         
                         <label for="titulo">Titulo:</label><br>
-                        <input class="form-control" type="text" id="titulo" name="titulo" value="A Importancia do Saber" required><br>
+                        <input class="form-control" type="text" id="titulo" name="titulo" value="" placeholder="Titulo do trabalho" required><br>
 
                         <button type="submit" class="btn btn-primary btn-block"><i class="fas fa-file-alt section-icon"></i></i>Gerar Código</button>                       
 

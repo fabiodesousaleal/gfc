@@ -54,20 +54,16 @@ def gerar_fator_semelhanca(sobrenome_procurado, sobrenome_tabela):
         sobrenome_procurado = sobrenome_procurado[:len(sobrenome_tabela)]                   
     elif len(sobrenome_procurado) < len(sobrenome_tabela):        
         sobrenome_is_menor = True
-        print(f'NOME PROCURADO É MENOR - Nenhuma conversão foi realizada')
-    
-    print(f'----------------------------------SOBRENOME: {sobrenome_procurado}')
 
     while i <= len(sobrenome_procurado)-1:          
-        if sobrenome_procurado[i] == sobrenome_tabela[i]:          
-            print(f'passo1 - letra:{sobrenome_tabela[i]} codigo: {ord(sobrenome_tabela[i])}')
+        if sobrenome_procurado[i] == sobrenome_tabela[i]:            
             somatorio += ord(sobrenome_tabela[i])
+            
             if sobrenome_is_menor and len(sobrenome_procurado)-1 == i :
                 somatorio -= ord(sobrenome_tabela[i]) 
-                print(f'passo1 REDUÇÃO - letra:{sobrenome_tabela[i]} codigo: {ord(sobrenome_tabela[i])} iteraçao: {i} cond:{len(sobrenome_procurado)}')
+
         else:
-            if sobrenome_tabela[i] < sobrenome_procurado[i]: 
-                print(f'passo2 - letra:{sobrenome_tabela[i]} codigo: {ord(sobrenome_tabela[i])}')
+            if sobrenome_tabela[i] < sobrenome_procurado[i]:              
                 somatorio += ord(sobrenome_tabela[i])
                 break
             else:
