@@ -1,7 +1,8 @@
 FROM ubuntu:latest
 
 WORKDIR /app
-COPY . .
+#COPY . .
+COPY requirements.txt .
 RUN apt update -y && \
 apt install -y python3.11 \
 python3.11-venv \

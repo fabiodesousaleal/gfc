@@ -21,4 +21,19 @@
 ## 4 - Iniciar o flask
     python3 app.py
 
+# 5 - ACESSANDO
+    localhost:5000
+
+
+# 6 - SUBINDO COM DOCKER   
+    clone do projeto
+    make build
+    make run
+
+# 7 - ACESSANDO
+    localhost:5000
+
+## 8 - VERSÕES
+    - Versão 1.0.0 : Projeto Inicial
+
 
