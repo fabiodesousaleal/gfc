@@ -5,6 +5,7 @@ HOST_PATH = $(shell pwd)
 
 help:
 	@echo "Usage:"
+	@echo "  make up       	  Faz o build e controi a Imagem"
 	@echo "  make build       Constrói a imagem Docker"
 	@echo "  make run         Inicializa um contêiner"
 	@echo "  make start       Inicia um contêiner parado"
@@ -20,6 +21,8 @@ build:
 
 run: build
 	docker run -d --name $(CONTAINER_NAME) -p 5000:5000 -v $(shell realpath $(HOST_PATH)):/app $(IMAGE_NAME)
+
+up: build run
 
 start:
 	docker start $(CONTAINER_NAME)

@@ -6,8 +6,9 @@ COPY requirements.txt .
 
 RUN apt update -y && apt install -y python3.11 \
 python3.11-venv \
-python3-pip \
-python3.11 -m venv /venv 
+python3-pip 
+
+RUN python3.11 -m venv /venv 
 
 ENV PATH="/venv/bin:$PATH"
 
