@@ -1,50 +1,34 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Formulário Estilizado</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
-    <link rel="stylesheet" href="/static/assets/css/main.css" type="text/css">     
-</head>
-<body>
-
-<div class="container">
-    <div class="titulo">
-        <img id="brasao" src="/static/assets/img/UFNT_brasao.png" class="section-icon">
-       
-    </div>
-    <div class="subtitulo">
-        Gerador de Ficha Catalográfica - GFC
-    </div>
-    <form action="/ficha/cutter" method="post">
-        <div class="row">
-            <div class="col-md-6">
-                <div class="card">
-                    <h3 class="text-left"><i class="fas fa-user section-icon"></i>Passo 1 - Autor</h3>
-                    <div class="form-group">                       
-                
-                        <label for="autor-sobrenome">Sobrenome:</label><br>
-                        <input class="form-control" type="text" id="sobrenome" name="sobrenome" value="" placeholder="Sobrenome" required><br>
-                        
-                        <label for="titulo">Titulo:</label><br>
-                        <input class="form-control" type="text" id="titulo" name="titulo" value="" placeholder="Titulo do trabalho" required><br>
-
-                        <button type="submit" class="btn btn-primary btn-block"><i class="fas fa-file-alt section-icon"></i></i>Gerar Código</button>                       
-
-                    </div>
-                    <!-- Adicione mais campos conforme necessário para a seção de Dados Pessoais -->
-                </div>                              
-            </div>
-        </div>        
-    </form>
-    {% if codigo_cutter %}
-        <div class="alert alert-success" role="alert">
-            <span style="font-weight:600; color: orangered;">{{sobrenome}}</span><br> 
-            Código Cutter: <span style="font-weight: 600; font-size: large;"> {{ codigo_cutter }}</span>           
-        </div>
-    {% endif %}
+{% extends 'base.html'}
+{% block content %} 
+<div class="subtitulo">
+    Gerador de Ficha Catalográfica - GFC
 </div>
+<form action="/ficha/cutter" method="post">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                <h3 class="text-left"><i class="fas fa-user section-icon"></i>Passo 1 - Autor</h3>
+                <div class="form-group">                       
+            
+                    <label for="autor-sobrenome">Sobrenome:</label><br>
+                    <input class="form-control" type="text" id="sobrenome" name="sobrenome" value="" placeholder="Sobrenome" required><br>
+                    
+                    <label for="titulo">Titulo:</label><br>
+                    <input class="form-control" type="text" id="titulo" name="titulo" value="" placeholder="Titulo do trabalho" required><br>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.mi
+                    <button type="submit" class="btn btn-primary btn-block"><i class="fas fa-file-alt section-icon"></i></i>Gerar Código</button>                       
+
+                </div>
+            </div>                              
+        </div>
+    </div>        
+</form>
+{% if codigo_cutter %}
+    <div class="alert alert-success" role="alert">
+        <span style="font-weight:600; color: orangered;">{{sobrenome}}</span><br> 
+        Código Cutter: <span style="font-weight: 600; font-size: large;"> {{ codigo_cutter }}</span>           
+    </div>
+{% endif %}
+</div>
+{% endblock %}
+    

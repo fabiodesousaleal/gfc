@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Formulário Estilizado</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+    <link rel="stylesheet" href="/static/assets/css/main.css" type="text/css">
+    <title>{% block title %}Gerador de Ficha Catalográfica{% endblock %}</title>    
+</head>
+<body>
+    <div class="titulo bg-dark">
+        <img src="/static/assets/img/UFNT_brasao.png">
+        Universidade Federal do Norte do Tocantins
+    </div>
+
+    {% block content %}{% endblock %}  
+
+    <footer class="text-center py-3">
+        <div class="container">
+            <hr style="width: 50%;">
+            <p>2024 Divisão de Sistemas - UFNT.</br>
+            Versão: 1.0.0</p>
+        </div>
+        </footer>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.mi"></script>  
+</body>
+</html>

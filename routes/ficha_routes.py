@@ -1,4 +1,4 @@
-from flask import Flask, Blueprint, render_template, request, send_from_directory,send_file, abort
+from flask import Blueprint, render_template, request, send_from_directory,send_file, abort
 from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import A4
 from reportlab.pdfbase import pdfmetrics
@@ -9,7 +9,7 @@ from reportlab.lib import colors
 from pdf2image import convert_from_path
 import os
 import io
-from data.data import *
+from data.data2 import *
 from utils.cutter import gerar_codigo_cutter
 from utils.utils import *
 from models.ficha_model import FichaModel

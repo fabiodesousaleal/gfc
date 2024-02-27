@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container mt-4">
+    <h2>Lista de Cursos</h2>
+    
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Curso</th>
+                <th>CDD</th>
+                <th>Campus ID</th>
+                <th>Tipo</th>
+                <th>Ativo</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for curso in cursos %}
+                <tr>
+                    <td>{{ curso[0] }}</td>
+                    <td>{{ curso[1] }}</td>
+                    <td>{{ curso[2] }}</td>
+                    <td>{{ curso[3] }}</td>
+                    <td>{{ curso[4] }}</td>
+                    <td>{{ curso[5] }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

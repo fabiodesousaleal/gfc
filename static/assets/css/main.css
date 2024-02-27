@@ -4,7 +4,8 @@ body {
 }
 
 .container {
-    margin-top: 80px;            
+    margin-top: 80px;
+    margin-bottom: 0;            
 }
 
 h4 {
@@ -78,4 +79,34 @@ button.btn-primary:hover {
 }
 .container .card form input:focus {
     background:#4bb1b9;
+}
+
+footer {
+    color: #515e6c;
+}
+.login-container {
+    margin-top: 100px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+}
+
+.login-container h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #007bff;
+}
+
+.login-form input {
+    margin-bottom: 15px;
+}
+
+.login-form button {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.login-form button:hover {
+    background-color: #0056b3;
 }

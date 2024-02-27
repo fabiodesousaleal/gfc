@@ -1,18 +1,5 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Formulário Estilizado</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
-    <link rel="stylesheet" href="/static/assets/css/main.css" type="text/css">
-</head>
-<body>
-    <div class="titulo bg-dark">
-        <img src="/static/assets/img/UFNT_brasao.png">
-        Universidade Federal do Norte do Tocantins
-    </div>
+{% extends 'base.html' %}  
+{% block content %}  
 <div class="container">    
     <div class="subtitulo">
         <span>Gerador de Ficha Catalográfica - GFC</span>
@@ -24,7 +11,7 @@
                 <div class="card">
                     <h4 class="text-left"><i class="fas fa-user section-icon"></i>Passo 1 - Autor</h4>
                     <div class="form-group">
-                        <label for="autor-nome">Autor: <b style="color: red;">*</b></label><br>
+                        <label for="autor-nome">Autor - Nome: <b style="color: red;">*</b></label><br>
                         <input class="form-control" type="text" id="autor-sobrenome" name="autor-nome" value="" placeholder="Nome" required maxlength="50"><br>
                 
                         <label for="autor-sobrenome">Autor - Sobrenome: <b style="color: red;">*</b></label><br>
@@ -251,16 +238,16 @@
                         <label for="assunto1">Assunto 1:  <b style="color: red;">*</b></label>
                         <input type="text" class="form-control" name="assunto1" id="assunto1" placeholder="Digite o assunto 1" maxlength="255" required>                        
 
-                        <label for="assunto2">Assunto 2:</label>
+                        <label for="assunto2">Assunto 2: <b style="color: red;">*</b></label>
                         <input type="text" class="form-control" name="assunto2" id="assunto2" placeholder="Digite o assunto 2" maxlength="255">
 
-                        <label for="assunto3">Assunto 3:</label>
+                        <label for="assunto3">Assunto 3: <b style="color: red;">*</b></label>
                         <input type="text" class="form-control" name="assunto3" id="assunto3" placeholder="Digite o assunto 3" maxlength="255">
 
-                        <label for="assunto4">Assunto 4:</label>
+                        <label for="assunto4">Assunto 4: <b style="color: red;">*</b></label>
                         <input type="text" class="form-control" name="assunto4" id="assunto4" placeholder="Digite o assunto 4" maxlength="255">
 
-                        <label for="assunto5">Assunto 5:</label>
+                        <label for="assunto5">Assunto 5: </label>
                         <input type="text" class="form-control" name="assunto5" id="assunto5" placeholder="Digite o assunto 5" maxlength="255">                        
                         
                     </div>
@@ -323,11 +310,4 @@
         </div>        
     </form>
 </div>
-<footer class="bg-dark text-light text-center py-1">
-    <div class="container">
-      <p>2024 Divisão de Sistemas - UFNT.</br>
-        Versão: 1.0.0</p>
-    </div>
-  </footer>
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.mi
+{% endblock %}
