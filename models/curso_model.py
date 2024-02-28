@@ -7,7 +7,7 @@ class CursoModel:
         self.id=id
         self.nome=nome
         self.cdd=cdd
-        self.campus=campus_id
+        self.campus_id=campus_id
         self.tipo=tipo
         self.ativo=ativo
     

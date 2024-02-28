@@ -1,9 +1,73 @@
 {% extends 'base.html' %}
-{% block content %}
 
-<div class="container mt-4">
-    <h2>Lista de Cursos</h2>
-    
+ {% block head %} 
+{% endblock %}
+{% block content %}
+  <header>
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">          
+          <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#cursoModal">
+                    Curso
+                  </button>
+              </li>
+              <li class="nav-item">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#cursoModal">
+                    Campus
+                  </button>
+              </li>                          
+            </ul>
+          </div>
+        </div>
+      </nav>
+  </header>
+
+
+<div class="container mt-10"> 
+
+
+ <!-- Modal -->
+ <div class="modal fade" id="cursoModal" tabindex="-1" role="dialog" aria-labelledby="cursoModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="cursoModalLabel">Novo Curso</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <!-- Formulário dentro do modal -->
+          <form id="cursoForm">
+            <div class="form-group">
+              <label for="curso">Curso:</label>
+              <input type="text" class="form-control" id="curso" name="curso">
+            </div>
+            <div class="form-group">
+              <label for="cdd">Código CDD:</label>
+              <input type="text" class="form-control" id="cdd" name="cdd">
+            </div>
+            <div class="form-group">
+              <label for="campus">Campus:</label>
+              <select class="form-control" id="campus" name="campus">
+                <option value="Palmas">Palmas</option>
+                <option value="Tocantinopolis">Tocantinopolis</option>
+                <option value="Arrais">Arrais</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="ativo">Ativo:</label>
+              <input type="text" class="form-control" id="ativo" name="ativo">
+            </div>
+            <button type="submit" class="btn btn-primary">Salvar</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+    <h2>Lista de Cursos</h2>       
     <table class="table table-striped">
         <thead>
             <tr>
@@ -13,20 +77,33 @@
                 <th>Campus ID</th>
                 <th>Tipo</th>
                 <th>Ativo</th>
+                <th>Editar</th>
             </tr>
         </thead>
         <tbody>
             {% for curso in cursos %}
                 <tr>
-                    <td>{{ curso[0] }}</td>
-                    <td>{{ curso[1] }}</td>
-                    <td>{{ curso[2] }}</td>
-                    <td>{{ curso[3] }}</td>
-                    <td>{{ curso[4] }}</td>
-                    <td>{{ curso[5] }}</td>
+                    <td>{{ curso.id }}</td>
+                    <td>{{ curso.nome }}</td>
+                    <td>{{ curso.cdd }}</td>
+                    <td>{{ curso.get_campus() }}</td>
+                    <td>{{ curso.tipo }}</td>
+                    <td>{{ curso.ativo }}</td>
+                    <th><a href="#">Editar</a></th>
                 </tr>
             {% endfor %}
         </tbody>
     </table>
 </div>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.8/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script>
+    // Limpar o formulário ao fechar o modal
+    $('#cursoModal').on('hidden.bs.modal', function () {
+      $('#cursoForm')[0].reset();
+    });
+  </script>
+  
 {% endblock %}
