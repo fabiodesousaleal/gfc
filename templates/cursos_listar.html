@@ -1,33 +1,24 @@
 {% extends 'base.html' %}
-
- {% block head %} 
-{% endblock %}
 {% block content %}
-  <header>
-    <nav class="navbar navbar-expand-lg">
-        <div class="container">          
-          <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
-            <ul class="navbar-nav">
-              <li class="nav-item">
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#cursoModal">
-                    Curso
-                  </button>
-              </li>
-              <li class="nav-item">
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#cursoModal">
-                    Campus
-                  </button>
-              </li>                          
-            </ul>
-          </div>
+
+<div class="container mt-10">  
+
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#cursoModal">
+  Adicionar Curso
+</button>
+<div class="mensage" style="margin-top: 5px;">  
+  {% if success_message %}
+        <div id="success-alert" class="alert alert-success" role="alert">
+            {{ success_message }}
         </div>
-      </nav>
-  </header>
+        {% endif %}
 
-
-<div class="container mt-10"> 
-
-
+        {% if error_message %}
+        <div id="error-alert" class="alert alert-danger" role="alert">
+            {{ error_message }}
+        </div>
+        {% endif %}
+</div> 
  <!-- Modal -->
  <div class="modal fade" id="cursoModal" tabindex="-1" role="dialog" aria-labelledby="cursoModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -39,34 +30,44 @@
           </button>
         </div>
         <div class="modal-body">
+
           <!-- Formulário dentro do modal -->
-          <form id="cursoForm">
+          <form id="cursoForm" action="/cursos/save" method="POST">
+            <input id="curso_id" name="curso_id" type="hidden" value="">
             <div class="form-group">
-              <label for="curso">Curso:</label>
-              <input type="text" class="form-control" id="curso" name="curso">
+              <label for="nome">Curso:</label>
+              <input type="text" class="form-control" id="nome" name="nome" required>
             </div>
             <div class="form-group">
               <label for="cdd">Código CDD:</label>
-              <input type="text" class="form-control" id="cdd" name="cdd">
+              <input type="text" class="form-control" id="cdd" name="cdd" required>
             </div>
             <div class="form-group">
-              <label for="campus">Campus:</label>
-              <select class="form-control" id="campus" name="campus">
-                <option value="Palmas">Palmas</option>
-                <option value="Tocantinopolis">Tocantinopolis</option>
-                <option value="Arrais">Arrais</option>
+              <label for="campus_id">Campus:</label>
+              <select class="form-control" id="campus_id" name="campus_id" required>
+                <option value="">--- Selecione um campus ---</option>
+                {% for item in campus %}
+                <option value="{{item.id}}">{{item.nome}}</option>                
+                {% endfor %}
               </select>
             </div>
             <div class="form-group">
-              <label for="ativo">Ativo:</label>
-              <input type="text" class="form-control" id="ativo" name="ativo">
-            </div>
+              <label for="tipo">Tipo:</label>
+              <select class="form-control" id="tipo" name="tipo" required>
+                <option value="">--- Selecione um campus ---</option>
+                <option value="Graduação">Graduação</option>
+                <option value="Especialização">Especialização</option>                
+              </select>
+            </div>    
             <button type="submit" class="btn btn-primary">Salvar</button>
           </form>
         </div>
       </div>
     </div>
   </div>
+
+  <!------->
+
     <h2>Lista de Cursos</h2>       
     <table class="table table-striped">
         <thead>
@@ -75,8 +76,7 @@
                 <th>Curso</th>
                 <th>CDD</th>
                 <th>Campus ID</th>
-                <th>Tipo</th>
-                <th>Ativo</th>
+                <th>Tipo</th>               
                 <th>Editar</th>
             </tr>
         </thead>
@@ -87,23 +87,66 @@
                     <td>{{ curso.nome }}</td>
                     <td>{{ curso.cdd }}</td>
                     <td>{{ curso.get_campus() }}</td>
-                    <td>{{ curso.tipo }}</td>
-                    <td>{{ curso.ativo }}</td>
-                    <th><a href="#">Editar</a></th>
+                    <td>{{ curso.tipo }}</td>                    
+                    <th><a href="#"><button type="button" class="btn btn-primary" onclick='abrirModalEditar("{{ curso.id }}")'>Editar Curso</button>
+                    </a></th>
                 </tr>
             {% endfor %}
         </tbody>
     </table>
 </div>
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.8/dist/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
+
 <script>
-    // Limpar o formulário ao fechar o modal
+   
     $('#cursoModal').on('hidden.bs.modal', function () {
       $('#cursoForm')[0].reset();
     });
+ 
+      function hideAlert(alertId) {
+          var alertElement = document.getElementById(alertId);
+          if (alertElement) {
+              setTimeout(function () {
+                  alertElement.classList.add('d-none');
+              }, 6000);  // 6000 milissegundos = 6 segundos
+          }
+      }
+      
+      hideAlert('success-alert');
+      hideAlert('error-alert');
+
+      function abrirModalEditar(cursoId) {         
+          let dados = {curso_id: cursoId};
+
+          fetch("/cursos/editar", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify(dados) // Os dados a serem enviados, convertidos para JSON
+          })
+          .then(curso => curso.json()) // Converter a resposta do servidor para JSON
+          .then(curso => {
+            // Se a requisição for bem sucedida, mostrar a resposta do servidor
+            $('#curso_id').val(curso.id);
+            $('#nome').val(curso.nome);
+            $('#cdd').val(curso.cdd);
+            $('#campus_id').val(curso.campus_id);
+            $('#tipo').val(curso.tipo);
+
+            // Abrir o modal
+            $('#cursoModal').modal('show');
+          })
+          .catch(erro => {
+            // Se a requisição falhar, mostrar o erro
+            alert(erro.message);
+          });
+        }
+
+
   </script>
   
 {% endblock %}

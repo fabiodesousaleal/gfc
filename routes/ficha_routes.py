@@ -1,4 +1,5 @@
-from flask import Blueprint, render_template, request, send_from_directory,send_file, abort
+from flask import Blueprint, jsonify, render_template, request, send_from_directory,send_file, abort
+
 from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import A4
 from reportlab.pdfbase import pdfmetrics
@@ -12,7 +13,11 @@ import io
 from data.data2 import *
 from utils.cutter import gerar_codigo_cutter
 from utils.utils import *
+
 from models.ficha_model import FichaModel
+from models.campus_model import CampusModel
+from models.curso_model import CursoModel
+from models.tipo_trabalho_model import TipoTrabalhoModel
 
 ficha_routes = Blueprint('ficha_routes', __name__)
 
@@ -27,7 +32,18 @@ CM_DOZE = 12 * 28.35
 
 @ficha_routes.route("/")
 def index():
-    return render_template("form.html")
+    campus = CampusModel.get_campus()
+    tipos_trabalho = TipoTrabalhoModel.get_tipos_trabalho()
+    return render_template("form.html", campus=campus, tipos_trabalho=tipos_trabalho)
+
+@ficha_routes.route("/get_cursos", methods=["POST"])
+def get_cursos():
+    dados = request.get_json()
+    campus_id = dados.get('campus_id')
+    cursos = CursoModel.get_cursos_by_campus_id(campus_id)
+    cursos_serialized = CursoModel.serialize_cursos(cursos)
+    return jsonify({'cursos': cursos_serialized})
+
 
 @ficha_routes.route("/cutter", methods=["GET", "POST"])
 def cutter():
@@ -35,7 +51,7 @@ def cutter():
         return render_template("form_cutter.html")
     elif request.method == 'POST':
         dados = request.form.to_dict()         
-        sobrenome = dados['sobrenome'] 
+        sobrenome = dados['sobrenome']
         titulo = dados['titulo']
         codigo_cutter = gerar_codigo_cutter(sobrenome, titulo)
         return render_template("form_cutter.html", codigo_cutter=codigo_cutter, sobrenome=sobrenome)       
@@ -91,21 +107,35 @@ def definir_estilo_paragrafos(fonte_nome)->dict:
 
 @ficha_routes.route("/gerar_ficha", methods=["POST"])
 def gerar_ficha():   
-    dados = request.form.to_dict()
-    ficha = FichaModel(
-        autor_nome = dados["autor-nome"],
-        autor_sobrenome = dados["autor-sobrenome"],
-        titulo_trabalho= dados["titulo-trabalho"],
-        titulo_subtitulo = dados["titulo-subtitulo"],
-        folhas = dados["folhas"],
-        campus = dados["campus"],
-        curso = dados["curso"],
-        ano = dados["ano"],
-        tipo_fonte = dados["tipo-fonte"],
-        tipo_arquivo = dados["tipo-arquivo"],
+    dados=request.form.to_dict()
+    
+    campus = CampusModel.get_campus_by_id(dados["campus"])
+    curso = CursoModel.get_curso_by_id(dados["curso"])
+    tipo_trabalho = TipoTrabalhoModel.get_tipo_trabalho_by_id(dados["tipo-trabalho"])
+
+    ficha=FichaModel(
+        autor_nome=dados["autor-nome"],
+        autor_sobrenome=dados["autor-sobrenome"],
+        titulo_trabalho=dados["titulo-trabalho"],        
+        folhas=dados["folhas"],
+        campus=campus.nome,
+        curso=curso,
+        ano=dados["ano"],
+        tipo_fonte=dados["tipo-fonte"],
+        tipo_arquivo=dados["tipo-arquivo"],
+        orientador_nome=dados['orientador-nome'],
+        orientador_sobrenome=dados['orientador-sobrenome'],        
+        assunto1=dados['assunto1'],
+        assunto2=dados['assunto2'],
+        assunto3=dados['assunto3'],
+        assunto4=dados['assunto4'],
+        coorientador_nome=dados['coorientador-nome'],
+        coorientador_sobrenome=dados['coorientador-sobrenome'],
+        tipo_trabalho=tipo_trabalho.nome,
+        titulo_subtitulo=dados["titulo-subtitulo"],
     )
 
-    tipo_arquivo = dados['tipo-arquivo']
+    tipo_arquivo=dados['tipo-arquivo']
     fonte_nome = ficha.tipo_fonte      
 
     registra_fontes()     
@@ -124,7 +154,7 @@ def gerar_ficha():
     # Desenha o retângulo
     c.rect(x_retangulo, y_retangulo, largura_retangulo, altura_retangulo)      
         
-    paragrafos = ficha.get_paragrafos(dados) 
+    paragrafos = ficha.get_paragrafos() 
     paragrafo_estilos = definir_estilo_paragrafos(fonte_nome)    
     
     #cabecalho1
@@ -148,45 +178,67 @@ def gerar_ficha():
 
     #CODIGO CUTTER
     codigo_cutter = ficha.get_codigo_cutter()
-    c.drawString(x_retangulo + CM_MEIO, y_retangulo + altura_retangulo - CM_UM, codigo_cutter)
+    c.drawString(x_retangulo + CM_MEIO/2, y_retangulo + altura_retangulo - CM_UM, codigo_cutter)
 
     #DEFINE A POSIÇÃO do eixo X para ser aplicado nos paragrafos
     posicao_x_paragrafos = x_retangulo + CM_UM_E_MEIO
 
-    #PARAGRAFO 1  -  nome cientifico  
+    #PARAGRAFO 1  -  Fabio, Leal 
     
     p1 = Paragraph(paragrafos[1], style=paragrafo_estilos['a_esquerda'])
     p1.wrap(largura_retangulo - 2 * 28.35, altura_retangulo) # aqui vai ficar um recuo 0,5 cm da borda direita do retangulo
     posicao_y_p1 = y_retangulo + altura_retangulo - p1.height - 20 # define o eixo y que sera apresentado o paragrafo1.
     p1.drawOn(c, posicao_x_paragrafos , posicao_y_p1)       
 
-    #PARAGRAFO 2 - titulo, subtitulo, nome completo, cidade, ano  
+    #PARAGRAFO 2 - Protocolo de Roteamento IPV6: A Eficiencia do IPv6. / Fábio de Sousa Leal, Araguaína, 2024 ...etc  
     p2 = Paragraph(paragrafos[2], style=paragrafo_estilos['justificado'])
     p2.wrap(largura_retangulo - 2 * 28.35, altura_retangulo) # aqui vai ficar um recuo 0,5 cm da borda direita do retangulo
     posicao_y_p2 = posicao_y_p1 - p2.height
     p2.drawOn(c, posicao_x_paragrafos, posicao_y_p2) 
 
-    #PARAGRAFO 3 - quantidade de folhas 
+    #PARAGRAFO 3 - 26 f. 
     p3 = Paragraph(paragrafos[3], style=paragrafo_estilos['justificado'])
     p3.wrap(largura_retangulo - 2 * 28.35, altura_retangulo) # aqui vai ficar um recuo 0,5 cm da borda direita do retangulo
     posicao_y_p3 = posicao_y_p2 - p3.height
     p3.drawOn(c, posicao_x_paragrafos, posicao_y_p3)  
 
-    #PARAGRAFO 4 - tipo graduacao, nome do curso  
+    #PARAGRAFO 4 - Monografia Graduação - Universidade Federal do Tocantins – ... etc
     p4 = Paragraph(paragrafos[4], style=paragrafo_estilos['justificado'])
     p4.wrap(largura_retangulo - 2 * 28.35, altura_retangulo) # aqui vai ficar um recuo 0,5 cm da borda direita do retangulo
-    posicao_y_p4 = posicao_y_p3 - p4.height
-    p4.drawOn(c, posicao_x_paragrafos, posicao_y_p4)
+    posicao_y_p4 = posicao_y_p3 - p4.height - CM_MEIO/2
+    p4.drawOn(c, posicao_x_paragrafos, posicao_y_p4 )
 
-    #PARAGRAFO 5 - assuntos 
+    #PARAGRAFO 5 - Orientador 
     p5 = Paragraph(paragrafos[5], style=paragrafo_estilos['justificado'])
     p5.wrap(largura_retangulo - 2 * 28.35, altura_retangulo) # aqui vai ficar um recuo 0,5 cm da borda direita do retangulo
-    posicao_y_p5 = posicao_y_p4 - p5.height
+    posicao_y_p5 = posicao_y_p4 - p5.height - CM_MEIO/2
     p5.drawOn(c, posicao_x_paragrafos, posicao_y_p5)
+
+    if ficha.coorientador_nome:
+        #PARAGRAFO 6 - Coorientador 
+        p6 = Paragraph(paragrafos[6], style=paragrafo_estilos['justificado'])
+        p6.wrap(largura_retangulo - 2 * 28.35, altura_retangulo) # aqui vai ficar um recuo 0,5 cm da borda direita do retangulo
+        posicao_y_p6 = posicao_y_p5 - p6.height
+        p6.drawOn(c, posicao_x_paragrafos, posicao_y_p6)    
+
+        #PARAGRAFO 7 - ASSUNTOS 
+        p7 = Paragraph(paragrafos[7], style=paragrafo_estilos['justificado'])
+        p7.wrap(largura_retangulo - 2 * 28.35, altura_retangulo) # aqui vai ficar um recuo 0,5 cm da borda direita do retangulo
+        posicao_y_p7 = posicao_y_p6 - p7.height - CM_MEIO/2
+        p7.drawOn(c, posicao_x_paragrafos, posicao_y_p7)
+
+    else:
+        #PARAGRAFO 7 - ASSUNTOS 
+        p7 = Paragraph(paragrafos[7], style=paragrafo_estilos['justificado'])
+        p7.wrap(largura_retangulo - 2 * 28.35, altura_retangulo) # aqui vai ficar um recuo 0,5 cm da borda direita do retangulo
+        posicao_y_p7 = posicao_y_p5 - p7.height - CM_MEIO/2
+        p7.drawOn(c, posicao_x_paragrafos, posicao_y_p7)
+
+    
 
     # CDD
     c.setFont(fonte_nome+"-Bold", FONTE_SIZE)
-    c.drawString(x_retangulo + 10*28.35, y_retangulo + CM_MEIO, ficha.get_cdd())
+    c.drawString(x_retangulo + 10*28.35 - CM_MEIO/2, y_retangulo + CM_MEIO, ficha.get_cdd())
 
     #RODAPE 5      
     r = Paragraph(ficha.RODAPE, style=paragrafo_estilos['justificado_sem_recuo'])

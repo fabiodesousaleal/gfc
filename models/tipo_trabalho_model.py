@@ -32,11 +32,9 @@ class TipoTrabalhoModel:
         cursor = con.cursor()
 
         if self.id is None:
-            # Se o id não estiver definido, é uma nova inserção
             query = 'INSERT INTO tipo_trabalho (nome, ativo) VALUES (?, ?)'
             cursor.execute(query, (self.nome, self.ativo))
         else:
-            # Se o id estiver definido, é uma atualização
             query = 'UPDATE tipo_trabalho SET nome=?, ativo=? WHERE id=?'
             cursor.execute(query, (self.nome, self.ativo, self.id))
 
@@ -48,7 +46,6 @@ class TipoTrabalhoModel:
         cursor = con.cursor()
 
         if self.id is not None:
-            # Se o id estiver definido, remove o tipo de trabalho com base no id
             query = 'DELETE FROM tipo_trabalho WHERE id=?'
             cursor.execute(query, (self.id,))
 

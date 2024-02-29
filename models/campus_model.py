@@ -73,7 +73,8 @@ class CampusModel:
             return campus
         else:
             con.close()
-            return None
+            return None     
+    
 
     def __str__(self) -> str:
         return self.nome
