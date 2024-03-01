@@ -252,6 +252,7 @@ def gerar_ficha():
         return send_from_directory("", "ficha.pdf", as_attachment=True)
         
     images = convert_from_path('ficha.pdf') 
+    
     img_io = io.BytesIO()
     images[0].save(img_io, 'PNG')
     os.remove('ficha.pdf')

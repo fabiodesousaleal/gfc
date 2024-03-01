@@ -22,7 +22,7 @@ def login():
         if user and check_password_hash(user[2], password):
             return 'Login bem-sucedido!'
         else:
-            return redirect('/cursos')
+            return render_template('home.html')
 
 
     return render_template('login.html')
