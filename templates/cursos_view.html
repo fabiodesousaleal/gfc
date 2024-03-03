@@ -1,0 +1,193 @@
+{% extends "base.html" %}
+
+  {% block head %}
+      <link rel="stylesheet" href="/static/assets/css/views/cursos_view.css" type="text/css">
+  {% endblock %}
+
+  {% block content %}
+
+    {% include "componentes/_menu_conf.html" %}
+
+  <div class="container"> 
+    
+  <div class="mensage" style="margin-top: 5px;">  
+    {% if success_message %}
+          <div id="success-alert" class="alert alert-success" role="alert">
+              {{ success_message }}
+          </div>
+          {% endif %}
+
+          {% if error_message %}
+          <div id="error-alert" class="alert alert-danger" role="alert">
+              {{ error_message }}
+          </div>
+          {% endif %}
+  </div> 
+
+  <!-- Modal -->
+  <div class="modal fade" id="cursoModal" tabindex="-1" role="dialog" aria-labelledby="cursoModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="cursoModalLabel">Novo Curso</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="closeModal()" id="closeModal">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+
+            <!-- Formulário dentro do modal -->
+            <form id="cursoForm" action="/cursos/save" method="POST">
+              <input id="curso_id" name="curso_id" type="hidden" value="">
+              <div class="form-group">
+                <label for="nome">Curso:</label>
+                <input type="text" class="form-control" id="nome" name="nome" required>
+              </div>
+              <div class="form-group">
+                <label for="cdd">Código CDD:</label>
+                <input type="text" class="form-control" id="cdd" name="cdd" required>
+              </div>
+              <div class="form-group">
+                <label for="campus_id">Campus:</label>
+                <select class="form-control" id="campus_id" name="campus_id" required>
+                  <option value="">--- Selecione um campus ---</option>
+                  {% for item in campus %}
+                  <option value="{{item.id}}">{{item.nome}}</option>                
+                  {% endfor %}
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="tipo">Tipo:</label>
+                <select class="form-control" id="tipo" name="tipo" required>
+                  <option value="">--- Selecione um campus ---</option>
+                  <option value="Graduação">Graduação</option>
+                  <option value="Especialização">Especialização</option>                
+                </select>
+              </div>    
+              <button type="submit" class="btn btn-primary">Salvar</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!------->
+
+    <div class="container">
+      <div class="row">
+        <h3><i class="fas fa-angle-double-right" style="color: rgb(42, 116, 180);"></i> Lista de Cursos</h3>
+      </div>
+      <div class="row" style="display: flex; justify-content: flex-end;">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#cursoModal" onclick="openModal()">
+            <i class="fas fa-plus"></i> Adicionar
+        </button>
+      </div>  
+      </div>
+    
+      
+      <hr>
+      <div style="border-radius:15px; overflow: auto; padding: 0px; background-color:rgb(67, 67, 67); ">
+        <table class="table table-striped bg-light" style="margin-top: 0px; padding:0px; border-top:2px solid rgb(67, 67, 67); ">
+          <thead class="bg-dark" style="color: aliceblue;">
+              <tr>
+                  <th></th>
+                  <th>Curso</th>
+                  <th>CDD</th>
+                  <th>Campus</th>
+                  <th>Tipo</th>
+                  <th>Editar</th>
+              </tr>
+          </thead>
+          <tbody>
+              {% for curso in cursos %}
+                  <tr>
+                      <td>{{ loop.index }}</td>
+                      <td>{{ curso.nome }}</td>
+                      <td>{{ curso.cdd }}</td>
+                      <td>{{ curso.get_campus() }}</td>
+                      <td>{{ curso.tipo }}</td>
+                      <td>
+                          <a href="#">
+                            <button type="button" class="btn" onclick='abrirModalEditar("{{ curso.id }}")'>
+                                <i class="fas fa-pencil-alt icon" title="editar"></i>
+                            </button>
+                        </a>
+                      </td>
+                  </tr>
+              {% endfor %}
+          </tbody>
+      </table>
+      </div>
+      
+  </div>
+  </div>
+
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.8/dist/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+  <script>
+      // Limpar o formulário ao fechar o modal
+      $('#cursoModal').on('hidden.bs.modal', function () {
+        $('#cursoForm')[0].reset();
+      });
+
+    
+      $('#cursoModal').on('hidden.bs.modal', function () {
+        $('#cursoForm')[0].reset();
+      });
+  
+        function hideAlert(alertId) {
+            var alertElement = document.getElementById(alertId);
+            if (alertElement) {
+                setTimeout(function () {
+                    alertElement.classList.add('d-none');
+                }, 6000);  // 6000 milissegundos = 6 segundos
+            }
+        }
+        
+        hideAlert('success-alert');
+        hideAlert('error-alert');
+
+        function abrirModalEditar(cursoId) {         
+            let dados = {curso_id: cursoId};
+
+            fetch("/cursos/editar", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json"
+              },
+              body: JSON.stringify(dados) // Os dados a serem enviados, convertidos para JSON
+            })
+            .then(curso => curso.json()) // Converter a resposta do servidor para JSON
+            .then(curso => {
+              // Se a requisição for bem sucedida, mostrar a resposta do servidor
+              $('#curso_id').val(curso.id);
+              $('#nome').val(curso.nome);
+              $('#cdd').val(curso.cdd);
+              $('#campus_id').val(curso.campus_id);
+              $('#tipo').val(curso.tipo);
+
+              // Abrir o modal
+              $('#cursoModal').modal('show');
+            })
+            .catch(erro => {
+              // Se a requisição falhar, mostrar o erro
+              alert(erro.message);
+            });
+          }
+        
+        function closeModal(){
+          $('#cursoModal').modal('hide');
+          $('#cursoForm')[0].reset();
+        }
+
+        function openModal(){
+          $('#cursoModal').modal('show');
+        }
+
+
+    </script>
+    
+  {% endblock %}

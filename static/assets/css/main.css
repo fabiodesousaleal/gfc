@@ -3,6 +3,11 @@ body {
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+.container a {
+    text-decoration: none;
+    color: darkslategrey;
+    
+}
 .container {
     margin-top: 80px;
     margin-bottom: 0;            
@@ -32,15 +37,13 @@ input.form-control {
 button.btn-primary {    
     background-color: #0e8939;
     border: 1px solid #034f03;
-    text-align: left;
-    width: 140px;
-    border: #656765;
-    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-align: center;    
+    border: #656765;    
 }
 
 button.btn-primary:hover {
     background-color: #0d7e34;
-    border: 1px solid #023e02;
+    border: 1px solid #2fa1d1;
 }
 
 .section-icon {
@@ -92,10 +95,14 @@ footer {
     padding: 30px;
 }
 
-.login-container h2 {
+.login-container h2 {    
+    font-size: 20px;
+    color: #1c6821;
+    line-height: 1.2;
+    text-transform: uppercase;
     text-align: center;
-    margin-bottom: 30px;
-    color: #007bff;
+    width: 100%;
+    display: block;
 }
 
 .login-form input {

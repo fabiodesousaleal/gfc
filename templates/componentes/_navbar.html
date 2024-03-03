@@ -1,19 +1,22 @@
 
 <nav class="navbar navbar-expand-lg navbar-light bg-dark titulo">
-  <!-- Logo e Título à esquerda -->
   <div class="container-fluid">
-    <a class="navbar-brand" href="#" style="color: darkseagreen; font-size: 16px; font-weight: 500;">      
+    <a class="navbar-brand" href="#" style="color: darkseagreen; font-size: 16px; font-weight: 600;">      
       <img src="/static/assets/img/UFNT_brasao.png" alt="Seu Logo" width="25" height="25" class="d-inline-block align-text-top">
       Universidade Federal do Norte do Tocantins</span>
     </a>
-
-    <!-- Ícone de Login à direita -->
     <div class="navbar-nav ms-auto">
-      <a class="nav-link" href="/login">
-        <i class="fas fa-user" style="color:darkorange"></i> <span style="color: azure; font-weight: 500;">Login</span>
-      </a>
+    {% if current_user.is_authenticated %}
+        <a class="nav-link" href="/login/logout" style="color: aliceblue;">
+            <i class="fa fa-sign-out-alt" style="color: orange;"></i> Logout
+        </a>      
+    {% else %}
+        <a class="nav-link" href="/login" style="color: aliceblue;">
+            <i class="fa fa-sign-in-alt" style="color: lightgreen;"></i> Login
+        </a>      
+    {% endif %}  
     </div>
   </div>
 </nav>
-<!-- Adicione o link para o Bootstrap JS e o Popper.js no final do corpo do HTML -->
+
 

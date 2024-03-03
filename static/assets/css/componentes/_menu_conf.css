@@ -1,0 +1,23 @@
+.row a {
+    color: #626060; 
+    text-decoration: none; 
+    position: relative; 
+    transition: filter 0.3s; 
+  }
+
+  .row a i {
+    margin-right: 5px; 
+    transition: filter 0.3s; 
+  }
+
+  .row a:hover {
+      color: #3a3838; 
+      filter: brightness(80%); 
+     
+      
+  }
+  .row a:hover i {
+      color: #ce0767; 
+      filter: brightness(80%); 
+      
+  }

@@ -12,7 +12,8 @@ RUN python3.11 -m venv /venv
 
 ENV PATH="/venv/bin:$PATH"
 
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt \
+flask-login
 RUN echo "ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true" | debconf-set-selections
 RUN echo "ttf-mscorefonts-installer msttcorefonts/present-mscorefonts-eula note" | debconf-set-selections
 RUN apt-get install -y ttf-mscorefonts-installer \

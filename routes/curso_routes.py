@@ -1,4 +1,5 @@
 from flask import Blueprint, jsonify, render_template, request, redirect, url_for
+from flask_login import login_required
 from models.curso_model import CursoModel
 from models.campus_model import CampusModel
 
@@ -7,13 +8,12 @@ curso_routes = Blueprint('curso_routes',__name__)
 
 
 @curso_routes.route('/', methods=['GET', 'POST'])
+@login_required
 def curso_listar():
     cursos = CursoModel.get_cursos()
     campus = CampusModel.get_campus()
-    return render_template('cursos_listar.html', cursos=cursos, campus=campus)
+    return render_template('cursos_view.html', cursos=cursos, campus=campus)
 
-
-from flask import render_template, flash
 
 @curso_routes.route('/save', methods=['POST'])
 def save_curso():
@@ -54,10 +54,11 @@ def save_curso():
     cursos = CursoModel.get_cursos()
     campus = CampusModel.get_campus()
 
-    return render_template('cursos_listar.html', campus=campus, cursos=cursos, success_message=success_message, error_message=error_message )
+    return render_template('cursos_view.html', campus=campus, cursos=cursos, success_message=success_message, error_message=error_message )
 
 
 @curso_routes.route('/editar', methods=["POST"])
+@login_required
 def teste():
     dados = request.get_json()
     curso_id = dados.get("curso_id")

@@ -1,5 +1,5 @@
 .PHONY: build run start stop restart remove help logs migrate
-IMAGE_NAME = fabiodesousaleal/gfc:v1.2.0
+IMAGE_NAME = fabiodesousaleal/gfc:v1.3.1
 CONTAINER_NAME = gfc_app
 HOST_PATH = $(shell pwd)
 
@@ -18,12 +18,10 @@ help:
 
 
 build:
-	docker build -t $(IMAGE_NAME) .
+	docker build $(IMAGE_NAME) .
 
-run: build
+run: 
 	docker run -d --name $(CONTAINER_NAME) -p 5000:5000 -v $(shell realpath $(HOST_PATH)):/app $(IMAGE_NAME)
-
-up: build run migrate
 
 start:
 	docker start $(CONTAINER_NAME)
@@ -41,3 +39,5 @@ logs:
 
 migrate:
 	python3.11 migrations/1_inicial.py && echo "Migrações realizadas com sucesso!"
+
+up: build run migrate

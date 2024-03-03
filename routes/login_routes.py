@@ -1,28 +1,31 @@
 from flask import Blueprint, render_template, request, redirect, url_for
-import sqlite3
+from flask_login import login_user, logout_user, current_user, login_required
 from werkzeug.security import check_password_hash
 
-login_routes = Blueprint('login_routes',__name__)
+from models.user_model import UserModel
 
-# Rota para a página de login
-@login_routes.route('/', methods=['GET', 'POST'])
-def login():
-    if request.method == 'POST':
-        username = request.form['username']
-        password = request.form['password']
-        conn = sqlite3.connect('data/gfc.db')
-        cursor = conn.cursor()
-        
-        cursor.execute('SELECT * FROM user WHERE username = ?', (username,))
-        user = cursor.fetchone()
+login_routes = Blueprint('login_routes', __name__)
 
-        conn.close()
-
-        # Verifica se o usuário existe e a senha está correta
-        if user and check_password_hash(user[2], password):
-            return 'Login bem-sucedido!'
-        else:
-            return render_template('home.html')
-
-
+@login_routes.route('/', methods=['GET'])
+def home():
     return render_template('login.html')
+
+@login_routes.route('/autenticar', methods=['POST'])
+def logar():
+    dados = request.form.to_dict()
+    username = dados['username']
+    password = dados['password']
+
+    user = UserModel.check_login(username, password)
+
+    if user:
+        login_user(user)
+        return redirect(url_for('curso_routes.curso_listar'))  # Use o nome da função da rota desejada
+
+    return render_template('login.html', mensagem='Usuário ou Senha incorretos')
+
+@login_routes.route('/logout')
+def logout():
+    logout_user()
+    return redirect(url_for('login_routes.home'))
+
