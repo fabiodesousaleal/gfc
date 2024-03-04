@@ -10,10 +10,26 @@
     transition: 0.4s;    
     
 }
+
 .icon:hover {
     background-color: rgba(55, 192, 238, 0.2);     
     color: blue;    
 }
+
+.icon-red {
+    background-color: rgba(55, 192, 238, 0.1);
+    border-radius: 5px;
+    padding: 5px;    
+    color: rgb(234, 121, 121);
+    transition: 0.4s;    
+    
+}
+
+.icon-red:hover {
+    background-color: rgba(55, 192, 238, 0.2);     
+    color: rgb(215, 64, 64);    
+}
+
 table {
     overflow-x: auto;
 }

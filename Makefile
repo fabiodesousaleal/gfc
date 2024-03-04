@@ -18,7 +18,7 @@ help:
 
 
 build:
-	docker build $(IMAGE_NAME) .
+	docker build -t $(IMAGE_NAME) .
 
 run: 
 	docker run -d --name $(CONTAINER_NAME) -p 5000:5000 -v $(shell realpath $(HOST_PATH)):/app $(IMAGE_NAME)

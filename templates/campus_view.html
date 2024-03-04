@@ -31,7 +31,7 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="modalLabel">Novo Tipo de Trabalho</h5>
+            <h5 class="modal-title" id="modalLabel">Novo Campus</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="closeModal()" id="closeModal">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -39,10 +39,10 @@
           <div class="modal-body">
 
             <!-- Formulário dentro do modal -->
-            <form id="tipo_trabalhoForm" action="/tipo_trabalho/save" method="POST">
-              <input id="tipo_trabalho_id" name="tipo_trabalho_id" type="hidden" value="">
+            <form id="campusForm" action="/campus/save" method="POST">
+              <input id="campus_id" name="campus_id" type="hidden" value="">
               <div class="form-group">
-                <label for="nome">tipo_trabalho:</label>
+                <label for="nome">campus:</label>
                 <input type="text" class="form-control" id="nome" name="nome" required>
               </div>                
               <button type="submit" class="btn btn-primary">Salvar</button>
@@ -56,7 +56,7 @@
 
     <div class="container">
       <div class="row">
-        <h3><i class="fas fa-angle-double-right" style="color: rgb(42, 116, 180);"></i> Lista de tipo_trabalhos</h3>
+        <h3><i class="fas fa-angle-double-right" style="color: rgb(42, 116, 180);"></i> Lista de Campus</h3>
       </div>
       <div class="row" style="display: flex; justify-content: flex-end;">
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal" onclick="openModal()">
@@ -72,15 +72,15 @@
           <thead class="bg-dark" style="color: aliceblue;">
               <tr>
                   <th></th>
-                  <th>Tipo de Trabalho</th>                  
+                  <th>Campus</th>                  
                   <th style="width:50px;">Editar</th>
                   <th style="width:50px;">Remover</th>
               </tr>
           </thead>
           <tbody>
-              {% for obj in tipos_trabalhos %}
+              {% for obj in campus %}
                   <tr id="tr{{ obj.id }}">
-                      <td>{{ loop.index }}</td>
+                      <td style="width: 40px;">{{ loop.index }}</td>
                       <td>{{ obj.nome }}</td>                    
                       <td>
                           <a href="#">
@@ -115,8 +115,9 @@
 
     function abrirModalRemover(id, info) {        
       $('#confirmModal').modal('show');
-      $('#item-remover').val(id);   
-      $('#info-remover').text(info)     
+      $('#item-remover').val(id);  
+      let coment = info + " . Todos os cursos relacionados também serão apagados. ";  
+      $('#info-remover').text(coment)     
     }
 
     function fecharModalRemover(){
@@ -129,7 +130,7 @@
         id: id
       };
       
-      fetch("/tipo_trabalho/delete", {
+      fetch("/campus/delete", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -153,12 +154,12 @@
   
       // Limpar o formulário ao fechar o modal
       $('#modal').on('hidden.bs.modal', function () {
-        $('#tipo_trabalhoForm')[0].reset();
+        $('#campusForm')[0].reset();
       });
 
     
       $('#modal').on('hidden.bs.modal', function () {
-        $('#tipo_trabalhoForm')[0].reset();
+        $('#campusForm')[0].reset();
       });
   
         function hideAlert(alertId) {
@@ -173,21 +174,21 @@
         hideAlert('success-alert');
         hideAlert('error-alert');
 
-        function abrirModalEditar(tipo_trabalhoId) {         
-            let dados = {tipo_trabalho_id: tipo_trabalhoId};
+        function abrirModalEditar(campusId) {         
+            let dados = {campus_id: campusId};
 
-            fetch("/tipo_trabalho/editar", {
+            fetch("/campus/editar", {
               method: "POST",
               headers: {
                 "Content-Type": "application/json"
               },
               body: JSON.stringify(dados) // Os dados a serem enviados, convertidos para JSON
             })
-            .then(tipo_trabalho => tipo_trabalho.json()) // Converter a resposta do servidor para JSON
-            .then(tipo_trabalho => {
+            .then(campus => campus.json()) // Converter a resposta do servidor para JSON
+            .then(campus => {
               // Se a requisição for bem sucedida, mostrar a resposta do servidor
-              $('#tipo_trabalho_id').val(tipo_trabalho.id);
-              $('#nome').val(tipo_trabalho.nome);             
+              $('#campus_id').val(campus.id);
+              $('#nome').val(campus.nome);             
 
               // Abrir o modal
               $('#modal').modal('show');
@@ -200,7 +201,7 @@
         
         function closeModal(){
           $('#modal').modal('hide');
-          $('#tipo_trabalhoForm')[0].reset();
+          $('#campusForm')[0].reset();
         }
 
         function openModal(){

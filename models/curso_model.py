@@ -41,7 +41,7 @@ class CursoModel(ClasseBase):
      
     def get_campus(self):
         if self.campus_id is not None:            
-            return CampusModel.get_campus_by_id(self.campus_id)
+            return CampusModel.get_by_id(self.campus_id)
         else:
             return None
         

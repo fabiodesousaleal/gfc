@@ -32,7 +32,7 @@ CM_DOZE = 12 * 28.35
 
 @ficha_routes.route("/")
 def index():
-    campus = CampusModel.get_campus()
+    campus = CampusModel.get_all()
     tipos_trabalho = TipoTrabalhoModel.get_all()
     return render_template("form.html", campus=campus, tipos_trabalho=tipos_trabalho)
 
@@ -109,7 +109,7 @@ def definir_estilo_paragrafos(fonte_nome)->dict:
 def gerar_ficha():   
     dados=request.form.to_dict()
     
-    campus = CampusModel.get_campus_by_id(dados["campus"])
+    campus = CampusModel.get_by_id(dados["campus"])
     curso = CursoModel.get_by_id(dados["curso"])
     tipo_trabalho = TipoTrabalhoModel.get_by_id(dados["tipo-trabalho"])
 

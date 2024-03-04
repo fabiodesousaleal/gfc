@@ -1,6 +1,9 @@
 import sqlite3
-#rom werkzeug.security import generate_password_hash
+from werkzeug.security import generate_password_hash
 import csv
+
+DEFAULT_ADMIN = 'admin'
+DEFAULT_PASSWORD = 'senhafacil'
 
 def create_table():
     try:    
@@ -31,7 +34,7 @@ def create_table():
                 campus_id INTEGER,
                 tipo TEXT NOT NULL,
                 ativo INTEGER DEFAULT 1,
-                FOREIGN KEY (campus_id) REFERENCES campus(id)         
+                FOREIGN KEY (campus_id) REFERENCES campus(id) ON DELETE CASCADE       
                 
             )
         ''')
@@ -80,10 +83,10 @@ def create_table():
                 nome = linha[0]           
                 cursor.execute('INSERT OR REPLACE INTO tipo_trabalho (nome, ativo) VALUES (?, ?)', (nome, 1))
             
-
-        #hashed_password = generate_password_hash('admin', method='pbkdf2:sha256')
-        #cursor.execute('INSERT OR REPLACE INTO curso (nome, cdd, ativo) VALUES (?, ?)', (curso, cdd, 1))
-        #conn.commit()
+        
+        hashed_password = generate_password_hash(DEFAULT_PASSWORD, method='pbkdf2:sha256')
+        cursor.execute('INSERT OR REPLACE INTO user (username, password, ativo) VALUES (?, ?, ?)', (DEFAULT_ADMIN, hashed_password, 1))
+        
         conn.commit()
         conn.close()        
     

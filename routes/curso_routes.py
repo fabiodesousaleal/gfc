@@ -11,7 +11,7 @@ curso_routes = Blueprint('curso_routes',__name__)
 @login_required
 def curso_listar():
     cursos = CursoModel.get_all()
-    campus = CampusModel.get_campus()
+    campus = CampusModel.get_all()
     return render_template('cursos_view.html', cursos=cursos, campus=campus)
 
 
@@ -52,19 +52,32 @@ def save_curso():
             error_message = f'Erro ao salvar curso: {str(e)}'
 
     cursos = CursoModel.get_all()
-    campus = CampusModel.get_campus()
+    campus = CampusModel.get_all()
 
     return render_template('cursos_view.html', campus=campus, cursos=cursos, success_message=success_message, error_message=error_message )
 
 
 @curso_routes.route('/editar', methods=["POST"])
 @login_required
-def teste():
+def buscar_cursos():
     dados = request.get_json()
     curso_id = dados.get("curso_id")
     curso = CursoModel.get_by_id(curso_id)
     if curso:
         return jsonify(curso.to_dict())
+    else:
+        return jsonify({"erro": "Dados inválidos."}), 400
+    
+
+@curso_routes.route('/delete', methods=["POST"])
+@login_required
+def remover_curso():
+    dados = request.get_json()
+    curso_id = dados.get("id")
+    curso = CursoModel.get_by_id(curso_id)
+    if curso:
+        curso.delete()
+        return jsonify({"mensagem": "Removido com sucesso"})
     else:
         return jsonify({"erro": "Dados inválidos."}), 400
     

@@ -32,8 +32,14 @@ class ClasseBase:
         con = get_conexao()
         cursor = con.cursor()
 
-        query = f'DELETE FROM {self.tabela} WHERE id=?'
-        cursor.execute(query, (self.id,))
+        # Excluir cursos associados ao campus (substitua 'curso' pelo nome da tabela dos cursos)
+        if self.tabela == 'campus':
+            query_cursos = 'DELETE FROM curso WHERE campus_id=?'
+            cursor.execute(query_cursos, (self.id,))
+
+        # Excluir o registro principal
+        query_principal = f'DELETE FROM {self.tabela} WHERE id=?'
+        cursor.execute(query_principal, (self.id,))
 
         con.commit()
         con.close()

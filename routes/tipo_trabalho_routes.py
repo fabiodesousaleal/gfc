@@ -51,12 +51,25 @@ def save_tipo_trabalho():
 
 @tt_routes.route('/editar', methods=["POST"])
 @login_required
-def teste():
+def busca_tipo_trabalho():
     dados = request.get_json()
     tipo_trabalho_id = dados.get("tipo_trabalho_id")
     tipo_trabalho = TipoTrabalhoModel.get_by_id(tipo_trabalho_id)
     if tipo_trabalho:
         return jsonify(tipo_trabalho.to_dict())
+    else:
+        return jsonify({"erro": "Dados inválidos."}), 400
+
+
+@tt_routes.route('/delete', methods=["POST"])
+@login_required
+def remove_tipo_trabalho():
+    dados = request.get_json()
+    tipo_trabalho_id = dados.get("id")
+    tipo_trabalho = TipoTrabalhoModel.get_by_id(tipo_trabalho_id)
+    if tipo_trabalho:
+        tipo_trabalho.delete()
+        return jsonify({"mensagem": "Removido com sucesso"})
     else:
         return jsonify({"erro": "Dados inválidos."}), 400
     

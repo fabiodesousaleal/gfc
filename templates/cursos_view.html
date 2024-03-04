@@ -24,6 +24,8 @@
           {% endif %}
   </div> 
 
+  {% include "componentes/_modal_remover.html" %}
+
   <!-- Modal -->
   <div class="modal fade" id="cursoModal" tabindex="-1" role="dialog" aria-labelledby="cursoModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
@@ -96,22 +98,30 @@
                   <th>Campus</th>
                   <th>Tipo</th>
                   <th>Editar</th>
+                  <th>Remover</th>
               </tr>
           </thead>
           <tbody>
-              {% for curso in cursos %}
-                  <tr>
+              {% for obj in cursos %}
+                  <tr id="tr{{ obj.id }}">
                       <td>{{ loop.index }}</td>
-                      <td>{{ curso.nome }}</td>
-                      <td>{{ curso.cdd }}</td>
-                      <td>{{ curso.get_campus() }}</td>
-                      <td>{{ curso.tipo }}</td>
+                      <td>{{ obj.nome }}</td>
+                      <td>{{ obj.cdd }}</td>
+                      <td>{{ obj.get_campus() }}</td>
+                      <td>{{ obj.tipo }}</td>
                       <td>
                           <a href="#">
-                            <button type="button" class="btn" onclick='abrirModalEditar("{{ curso.id }}")'>
+                            <button type="button" class="btn" onclick='abrirModalEditar("{{ obj.id }}")'>
                                 <i class="fas fa-pencil-alt icon" title="editar"></i>
                             </button>
                         </a>
+                      </td>
+                      <td>
+                        <a href="#">                          
+                          <button type="button" class="btn" onclick='abrirModalRemover("{{ obj.id }}", "{{ obj.nome }}");'>
+                            <i class="fas fa-trash-alt icon-red"></i> 
+                          </button>
+                      </a>
                       </td>
                   </tr>
               {% endfor %}
@@ -128,6 +138,42 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
   <script>
+    function abrirModalRemover(id, info) {        
+      $('#confirmModal').modal('show');
+      $('#item-remover').val(id);       
+      $('#info-remover').text(info)     
+    }
+
+    function fecharModalRemover(){
+      $('#confirmModal').modal('hide');
+    }
+
+    function removerItem() {
+      let id = $('#item-remover').val();
+      dados = {
+        id: id
+      };
+      
+      fetch("/cursos/delete", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(dados) // Os dados a serem enviados, convertidos para JSON
+      })
+      .then(response => response.json()) // Converter a resposta do servidor para JSON
+      .then(response => {
+        // Se a requisição for bem sucedida, mostrar a resposta do servidor
+          fecharModalRemover()
+          $("#tr"+id).remove()
+      })
+      .catch(erro => {
+        // Se a requisição falhar, mostrar o erro
+        alert(erro.message);
+      });
+
+    }
+
       // Limpar o formulário ao fechar o modal
       $('#cursoModal').on('hidden.bs.modal', function () {
         $('#cursoForm')[0].reset();
