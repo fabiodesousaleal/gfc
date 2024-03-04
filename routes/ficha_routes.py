@@ -33,15 +33,15 @@ CM_DOZE = 12 * 28.35
 @ficha_routes.route("/")
 def index():
     campus = CampusModel.get_campus()
-    tipos_trabalho = TipoTrabalhoModel.get_tipos_trabalho()
+    tipos_trabalho = TipoTrabalhoModel.get_all()
     return render_template("form.html", campus=campus, tipos_trabalho=tipos_trabalho)
 
 @ficha_routes.route("/get_cursos", methods=["POST"])
 def get_cursos():
     dados = request.get_json()
     campus_id = dados.get('campus_id')
-    cursos = CursoModel.get_cursos_by_campus_id(campus_id)
-    cursos_serialized = CursoModel.serialize_cursos(cursos)
+    cursos = CursoModel.get_cursos_by_campus_id(campus_id)    
+    cursos_serialized = CursoModel.serialize(cursos)
     return jsonify({'cursos': cursos_serialized})
 
 
@@ -110,8 +110,8 @@ def gerar_ficha():
     dados=request.form.to_dict()
     
     campus = CampusModel.get_campus_by_id(dados["campus"])
-    curso = CursoModel.get_curso_by_id(dados["curso"])
-    tipo_trabalho = TipoTrabalhoModel.get_tipo_trabalho_by_id(dados["tipo-trabalho"])
+    curso = CursoModel.get_by_id(dados["curso"])
+    tipo_trabalho = TipoTrabalhoModel.get_by_id(dados["tipo-trabalho"])
 
     ficha=FichaModel(
         autor_nome=dados["autor-nome"],
@@ -177,7 +177,7 @@ def gerar_ficha():
     cabecalho3.drawOn(c, x_retangulo -7, posicao_y_cabecalho3)  
 
     #CODIGO CUTTER
-    codigo_cutter = ficha.get_codigo_cutter()
+    codigo_cutter = ficha.get_codigo_cutter()    
     c.drawString(x_retangulo + CM_MEIO/2, y_retangulo + altura_retangulo - CM_UM, codigo_cutter)
 
     #DEFINE A POSIÇÃO do eixo X para ser aplicado nos paragrafos

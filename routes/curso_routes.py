@@ -10,7 +10,7 @@ curso_routes = Blueprint('curso_routes',__name__)
 @curso_routes.route('/', methods=['GET', 'POST'])
 @login_required
 def curso_listar():
-    cursos = CursoModel.get_cursos()
+    cursos = CursoModel.get_all()
     campus = CampusModel.get_campus()
     return render_template('cursos_view.html', cursos=cursos, campus=campus)
 
@@ -26,7 +26,7 @@ def save_curso():
 
         try:
             if id:
-                curso = CursoModel.get_curso_by_id(id)
+                curso = CursoModel.get_by_id(id)
                 if curso:
                     curso.nome = dados.get('nome')
                     curso.cdd = dados.get('cdd')
@@ -51,7 +51,7 @@ def save_curso():
         except Exception as e:
             error_message = f'Erro ao salvar curso: {str(e)}'
 
-    cursos = CursoModel.get_cursos()
+    cursos = CursoModel.get_all()
     campus = CampusModel.get_campus()
 
     return render_template('cursos_view.html', campus=campus, cursos=cursos, success_message=success_message, error_message=error_message )
@@ -62,7 +62,7 @@ def save_curso():
 def teste():
     dados = request.get_json()
     curso_id = dados.get("curso_id")
-    curso = CursoModel.get_curso_by_id(curso_id)
+    curso = CursoModel.get_by_id(curso_id)
     if curso:
         return jsonify(curso.to_dict())
     else:

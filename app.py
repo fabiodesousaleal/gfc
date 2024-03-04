@@ -4,6 +4,7 @@ from flask_login import LoginManager, login_required
 from routes.ficha_routes import ficha_routes
 from routes.login_routes import login_routes
 from routes.curso_routes import curso_routes
+from routes.tipo_trabalho_routes import tt_routes
 from models.user_model import UserModel
 
 app = Flask(__name__)
@@ -20,6 +21,7 @@ def load_user(user_id):
 app.register_blueprint(ficha_routes, url_prefix='/ficha')
 app.register_blueprint(login_routes, url_prefix='/login')
 app.register_blueprint(curso_routes, url_prefix='/cursos')
+app.register_blueprint(tt_routes, url_prefix='/tipo_trabalho')
 login_manager.login_view = 'login_routes.home'
 
 

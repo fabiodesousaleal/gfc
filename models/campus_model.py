@@ -73,8 +73,22 @@ class CampusModel:
             return campus
         else:
             con.close()
-            return None     
+            return None   
+           
+       
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'nome': self.nome,
+            'ativo': self.ativo           
+        }
     
+    @staticmethod
+    def serialize(itens):
+        serialized_list = []
+        for item in itens:
+            serialized_list.append(item.to_dict())
+        return serialized_list
 
     def __str__(self) -> str:
         return self.nome
