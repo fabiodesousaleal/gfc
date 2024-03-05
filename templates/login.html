@@ -1,4 +1,7 @@
 {% extends 'base.html' %}
+{% block head %}
+<link rel="stylesheet" href="/static/assets/css/login.css" type="text/css">
+{% endblock %}
 {% block content %}
     <div class="container">
         <div class="row justify-content-center">
@@ -15,14 +18,14 @@
                         <label for="username" class="visually-hidden">Username:</label>
                         <div class="input-group">
                             <span class="input-group-text"><i class="fas fa-user"></i></span>
-                            <input type="text" class="form-control" id="username" name="username" placeholder="Username" required>
+                            <input type="text" class="form-control login" id="username" name="username" placeholder="Username" required>
                         </div>
                     </div>
                     <div class="mb-3">
                         <label for="password" class="visually-hidden">Password:</label>
                         <div class="input-group">
                             <span class="input-group-text"><i class="fas fa-lock"></i></span>
-                            <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
+                            <input type="password" class="form-control login" id="password" name="password" placeholder="Password" required>
                         </div>
                     </div>
                     <button type="submit" class="btn btn-primary" style="background-color: #067032; border-color: #10a950; width: 100%; text-align:center;">

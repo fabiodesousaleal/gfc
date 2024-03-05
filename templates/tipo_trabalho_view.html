@@ -8,21 +8,8 @@
 
     {% include "componentes/_menu_conf.html" %}
 
-  <div class="container"> 
-    
-  <div class="mensage" style="margin-top: 5px;">  
-    {% if success_message %}
-          <div id="success-alert" class="alert alert-success" role="alert">
-              {{ success_message }}
-          </div>
-          {% endif %}
+  <div class="container">     
 
-          {% if error_message %}
-          <div id="error-alert" class="alert alert-danger" role="alert">
-              {{ error_message }}
-          </div>
-          {% endif %}
-  </div> 
 
   {% include "componentes/_modal_remover.html" %}
 
@@ -42,7 +29,7 @@
             <form id="tipo_trabalhoForm" action="/tipo_trabalho/save" method="POST">
               <input id="tipo_trabalho_id" name="tipo_trabalho_id" type="hidden" value="">
               <div class="form-group">
-                <label for="nome">tipo_trabalho:</label>
+                <label for="nome">Tipo:</label>
                 <input type="text" class="form-control" id="nome" name="nome" required>
               </div>                
               <button type="submit" class="btn btn-primary">Salvar</button>
@@ -80,7 +67,7 @@
           <tbody>
               {% for obj in tipos_trabalhos %}
                   <tr id="tr{{ obj.id }}">
-                      <td>{{ loop.index }}</td>
+                    <td style="width: 40px;">{{ loop.index }}</td>
                       <td>{{ obj.nome }}</td>                    
                       <td>
                           <a href="#">
@@ -208,6 +195,6 @@
         }
      
 
-    </script>
+    </script>   
     
   {% endblock %}

@@ -1,6 +1,7 @@
 body {
     background-color: #cacaca;
-    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif, Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 500;
 }
 
 .container a {
@@ -53,12 +54,11 @@ button.btn-primary:hover {
 }
 .titulo {   
     text-transform: uppercase; 
-    font-size: 16px;
+    font-size: 12px;
     color: #199f5c;
     border-bottom: 4px solid #323d48;              
     margin-bottom: 0px;
-    padding: 10px;
-    font-weight: 700;
+    padding: 10px;    
     text-align: left;
     position: fixed;
     top: 0;

@@ -8,23 +8,9 @@
 
     {% include "componentes/_menu_conf.html" %}
 
-  <div class="container"> 
-    
-  <div class="mensage" style="margin-top: 5px;">  
-    {% if success_message %}
-          <div id="success-alert" class="alert alert-success" role="alert">
-              {{ success_message }}
-          </div>
-          {% endif %}
+  <div class="container">   
 
-          {% if error_message %}
-          <div id="error-alert" class="alert alert-danger" role="alert">
-              {{ error_message }}
-          </div>
-          {% endif %}
-  </div> 
-
-  {% include "componentes/_modal_remover.html" %}
+{% include "componentes/_modal_remover.html" %}
 
   <!-- Modal -->
   <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
@@ -42,7 +28,7 @@
             <form id="campusForm" action="/campus/save" method="POST">
               <input id="campus_id" name="campus_id" type="hidden" value="">
               <div class="form-group">
-                <label for="nome">campus:</label>
+                <label for="nome">Campus:</label>
                 <input type="text" class="form-control" id="nome" name="nome" required>
               </div>                
               <button type="submit" class="btn btn-primary">Salvar</button>

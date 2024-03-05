@@ -1,0 +1,184 @@
+{% extends "base.html" %}
+
+  {% block head %}
+      <link rel="stylesheet" href="/static/assets/css/views/view.css" type="text/css">
+  {% endblock %}
+
+  {% block content %}
+
+    {% include "componentes/_menu_conf.html" %}
+
+  <div class="container">
+    
+  {% include "componentes/_modal_remover.html" %}
+
+  <!-- Modal -->
+  <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modalLabel">Editar Parâmetros</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="closeModal()" id="closeModal">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+
+            <!-- Formulário dentro do modal -->
+            <form id="parametroForm" action="/parametro/save" method="POST">
+                <input id="parametro_id" name="parametro_id" type="hidden" value="">
+                <div class="form-group">
+
+                    <label for="instituicao">Instituição:</label>
+                    <textarea class="form-control" id="instituicao" name="instituicao" rows="2" required></textarea>
+            
+                    <label for="cabecalho1">Cabeçalho1:</label>
+                    <textarea class="form-control" id="cabecalho1" name="cabecalho1" rows="3" required></textarea>
+            
+                    <label for="cabecalho2">Cabeçalho2:</label>
+                    <textarea class="form-control" id="cabecalho2" name="cabecalho2" rows="3" required></textarea>
+            
+                    <label for="cabecalho3">Cabeçalho3:</label>
+                    <textarea class="form-control" id="cabecalho3" name="cabecalho3" rows="3" required></textarea>
+            
+                    <label for="rodape">Rodapé:</label>
+                    <textarea class="form-control" id="rodape" name="rodape" rows="6" required></textarea>
+            
+                    <button type="submit" class="btn btn-primary" style="margin: 3px;">Enviar</button>         
+            
+            
+
+              </div>                
+             
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!------->
+
+    <div class="container">
+      <div class="row">
+        <h3><i class="fas fa-angle-double-right" style="color: rgb(42, 116, 180);"></i> Lista de Parâmetros</h3>     
+      </div>    
+      
+      <hr>
+      <div style="border-radius:15px; overflow: auto; padding: 0px; background-color:rgb(67, 67, 67); ">
+        <table class="table table-striped bg-light" style="margin-top: 0px; padding:0px; border-top:2px solid rgb(67, 67, 67); ">
+            <thead class="bg-dark" style="color: aliceblue;">
+                <tr>                    
+                    <th>Dados</th>
+                    <th style="width:50px;">Editar</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for obj in parametros %}
+                    <tr id="tr{{ obj.id }}">                       
+                        <td>
+                            <div style="margin-top:5px;">
+                                <strong>Instituição:</strong> {{ obj.instituicao }} 
+                            </div>
+                            <div style="margin-top:5px;">
+                                <strong>Cabeçalho1:</strong> {{ obj.cabecalho1 }} 
+                            </div>
+                            <div style="margin-top:5px;">
+                                <strong>Cabeçalho2:</strong> {{ obj.cabecalho2 }} 
+                            </div>
+                            <div style="margin-top:5px;">
+                                <strong>Cabeçalho3:</strong> {{ obj.cabecalho3 }} 
+                            </div>
+                            <div style="margin-top:5px;">
+                                <strong>Rodapé:</strong> {{ obj.rodape }} <br>
+                            </div>
+                        </td>
+                        <td>
+                            <a href="#">
+                                <button type="button" class="btn" onclick='abrirModalEditar("{{ obj.id }}")'>
+                                    <i class="fas fa-pencil-alt icon" title="editar"></i>
+                                </button>
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        
+      </div>
+      
+  </div>
+  </div>
+
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.8/dist/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+  <script>
+
+ 
+  
+      // Limpar o formulário ao fechar o modal
+      $('#modal').on('hidden.bs.modal', function () {
+        $('#parametroForm')[0].reset();
+      });
+
+    
+      $('#modal').on('hidden.bs.modal', function () {
+        $('#parametroForm')[0].reset();
+      });
+  
+        function hideAlert(alertId) {
+            var alertElement = document.getElementById(alertId);
+            if (alertElement) {
+                setTimeout(function () {
+                    alertElement.classList.add('d-none');
+                }, 6000);  // 6000 milissegundos = 6 segundos
+            }
+        }
+        
+        hideAlert('success-alert');
+        hideAlert('error-alert');
+
+        function abrirModalEditar(parametroId) {         
+            let dados = {parametro_id: parametroId};
+
+            fetch("/parametro/editar", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json"
+              },
+              body: JSON.stringify(dados) // Os dados a serem enviados, convertidos para JSON
+            })
+            .then(parametro => parametro.json()) // Converter a resposta do servidor para JSON
+            .then(parametro => {
+              // Se a requisição for bem sucedida, mostrar a resposta do servidor
+              $('#parametro_id').val(parametro.id);
+              $('#instituicao').val(parametro.instituicao);
+              $('#cabecalho1').val(parametro.cabecalho1);
+              $('#cabecalho2').val(parametro.cabecalho2); 
+              $('#cabecalho3').val(parametro.cabecalho3); 
+              $('#rodape').val(parametro.rodape);              
+
+              // Abrir o modal
+              $('#modal').modal('show');
+            })
+            .catch(erro => {
+              // Se a requisição falhar, mostrar o erro
+              alert(erro.message);
+            });
+        }
+        
+        function closeModal(){
+          $('#modal').modal('hide');
+          $('#parametroForm')[0].reset();
+        }
+
+        function openModal(){
+          $('#modal').modal('show');
+        }
+     
+
+    </script>
+    
+  {% endblock %}

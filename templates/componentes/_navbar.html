@@ -19,4 +19,17 @@
   </div>
 </nav>
 
+<div id="msg" class="mensage" style="margin-top: 60px;">  
+  {% if success_message %}
+        <div id="success-alert" class="alert alert-success" role="alert">
+            {{ success_message }}
+        </div>
+        {% endif %}
+
+        {% if error_message %}
+        <div id="error-alert" class="alert alert-danger" role="alert">
+            {{ error_message }}
+        </div>
+        {% endif %}
+</div> 
 

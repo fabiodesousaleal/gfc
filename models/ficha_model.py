@@ -3,16 +3,12 @@ from utils.cutter import gerar_codigo_cutter
 from models.curso_model import CursoModel
 from models.campus_model import CampusModel
 from models.tipo_trabalho_model import TipoTrabalhoModel
+from models.parametro_model import ParametroModel
 from data.data2 import *
 
 class FichaModel:
-    CABECALHO1 = "Dados Internacionais de Catalogação na Publicação (CIP)"
-    CABECALHO2 = "Sistema de Geração de Ficha Catalografica SGFC-UFNT" 
-    CABECALHO3 = "Gerado automaticamente mediante os dados fornecidos pelo(a) autor(a)"
-    INSTITUICAO ='Universidade Federal do Norte do Tocantins'   
-    RODAPE = "TODOS OS DIREITOS RESERVADOS – A reprodução total ou parcial, de qualquer forma ou por qualquer meio deste documento é autorizado desde que citada a fonte. A violação dos direitos do autor (Lei nº 9.610/98) é crime estabelecido pelo artigo 184 do Código Penal."
-
-    def __init__(self, 
+    def __init__(self,
+                 parametro: ParametroModel, 
                  autor_nome,
                  autor_sobrenome,
                  titulo_trabalho,                 
@@ -33,6 +29,7 @@ class FichaModel:
                  coorientador_sobrenome=None,
                  titulo_subtitulo=None,
                    ) -> None:
+        self.parametro = parametro
         self.autor_nome = autor_nome
         self.autor_sobrenome = autor_sobrenome
         self.titulo_trabalho = titulo_trabalho
@@ -74,7 +71,7 @@ class FichaModel:
             paragrafo2 = f'{self.titulo_trabalho}. / {autor_nome_completo}. - {self.campus}, TO, {self.ano}.' 
 
         paragrafo3 = f'{self.folhas} f.'
-        paragrafo4 = f'{self.tipo_trabalho} ({self.curso.tipo} - {self.curso.nome}) --{self.INSTITUICAO}, {self.ano}.' 
+        paragrafo4 = f'{self.tipo_trabalho} ({self.curso.tipo} - {self.curso.nome}) --{self.parametro.instituicao}, {self.ano}.' 
         paragrafo5 = f'Orientador: {self.orientador_nome} {self.orientador_sobrenome}.'
         paragrafo6 = f'Coorientador: {self.coorientador_nome} {self.coorientador_sobrenome}.'
         paragrafo7 = f'{assuntos}'       

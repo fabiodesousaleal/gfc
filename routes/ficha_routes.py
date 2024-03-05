@@ -18,6 +18,7 @@ from models.ficha_model import FichaModel
 from models.campus_model import CampusModel
 from models.curso_model import CursoModel
 from models.tipo_trabalho_model import TipoTrabalhoModel
+from models.parametro_model import ParametroModel
 
 ficha_routes = Blueprint('ficha_routes', __name__)
 
@@ -34,7 +35,7 @@ CM_DOZE = 12 * 28.35
 def index():
     campus = CampusModel.get_all()
     tipos_trabalho = TipoTrabalhoModel.get_all()
-    return render_template("form.html", campus=campus, tipos_trabalho=tipos_trabalho)
+    return render_template("ficha_view.html", campus=campus, tipos_trabalho=tipos_trabalho)
 
 @ficha_routes.route("/get_cursos", methods=["POST"])
 def get_cursos():
@@ -114,6 +115,7 @@ def gerar_ficha():
     tipo_trabalho = TipoTrabalhoModel.get_by_id(dados["tipo-trabalho"])
 
     ficha=FichaModel(
+        parametro=ParametroModel.get_by_id(1),
         autor_nome=dados["autor-nome"],
         autor_sobrenome=dados["autor-sobrenome"],
         titulo_trabalho=dados["titulo-trabalho"],        
@@ -158,20 +160,20 @@ def gerar_ficha():
     paragrafo_estilos = definir_estilo_paragrafos(fonte_nome)    
     
     #cabecalho1
-    cabecalho1 = Paragraph(ficha.CABECALHO1, style=paragrafo_estilos['centralizado'])
+    cabecalho1 = Paragraph(ficha.parametro.cabecalho1, style=paragrafo_estilos['centralizado'])
     cabecalho1.wrap(largura_retangulo, altura_retangulo) # aqui vai ficar um recuo 0,5 cm da borda direita do retangulo  
     posicao_y_cabecalho1 = y_retangulo + altura_retangulo + 30  
     cabecalho1.drawOn(c, x_retangulo, posicao_y_cabecalho1 )  
 
     #cabecalho2
-    cabecalho2 = Paragraph(ficha.CABECALHO2, style=paragrafo_estilos['centralizado'])
+    cabecalho2 = Paragraph(ficha.parametro.cabecalho2, style=paragrafo_estilos['centralizado'])
     cabecalho2.wrap(largura_retangulo, altura_retangulo) # aqui vai ficar um recuo 0,5 cm da borda direita do retangulo    
     posicao_y_cabecalho2 = posicao_y_cabecalho1 - cabecalho2.height
     cabecalho2.drawOn(c, x_retangulo, posicao_y_cabecalho2)
 
     #cabecalho3       
     paragrafo_estilos['centralizado'].fontName=fonte_nome+'-Bold' #alterando paragrafo centralizado para negrito
-    cabecalho3 = Paragraph(ficha.CABECALHO3, style=paragrafo_estilos['centralizado'])
+    cabecalho3 = Paragraph(ficha.parametro.cabecalho3, style=paragrafo_estilos['centralizado'])
     cabecalho3.wrap(largura_retangulo + 10, altura_retangulo) # aqui vai ficar um recuo 0,5 cm da borda direita do retangulo    
     posicao_y_cabecalho3 = posicao_y_cabecalho2 - cabecalho3.height
     cabecalho3.drawOn(c, x_retangulo -7, posicao_y_cabecalho3)  
@@ -241,7 +243,7 @@ def gerar_ficha():
     c.drawString(x_retangulo + 10*28.35 - CM_MEIO/2, y_retangulo + CM_MEIO, ficha.get_cdd())
 
     #RODAPE 5      
-    r = Paragraph(ficha.RODAPE, style=paragrafo_estilos['justificado_sem_recuo'])
+    r = Paragraph(ficha.parametro.rodape, style=paragrafo_estilos['justificado_sem_recuo'])
     r.wrap(largura_retangulo, altura_retangulo) # aqui vai ficar um recuo 0,5 cm da borda direita do retangulo    
     r.drawOn(c, x_retangulo, y_retangulo - r.height)
 

@@ -3,7 +3,15 @@ from werkzeug.security import generate_password_hash
 import csv
 
 DEFAULT_ADMIN = 'admin'
-DEFAULT_PASSWORD = 'senhafacil'
+DEFAULT_PASSWORD = 'admin'
+
+INSTITUICAO ='Universidade Federal do Norte do Tocantins'   
+CABECALHO1 = "Dados Internacionais de Catalogação na Publicação (CIP)"
+CABECALHO2 = "Sistema de Geração de Ficha Catalografica SGFC-UFNT" 
+CABECALHO3 = "Gerado automaticamente mediante os dados fornecidos pelo(a) autor(a)"
+
+RODAPE = "TODOS OS DIREITOS RESERVADOS – A reprodução total ou parcial, de qualquer forma ou por qualquer meio deste documento é autorizado desde que citada a fonte. A violação dos direitos do autor (Lei nº 9.610/98) é crime estabelecido pelo artigo 184 do Código Penal."
+
 
 def create_table():
     try:    
@@ -56,6 +64,19 @@ def create_table():
                 FOREIGN KEY (tipo_trabalho_id) REFERENCES tipo_trabalho(tipo_trabalho_id)
             )
         ''')
+
+        cursor.execute('''
+            CREATE TABLE IF NOT EXISTS parametro (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                instituicao TEXT,
+                cabecalho1 TEXT,
+                cabecalho2 TEXT,
+                cabecalho3 TEXT,
+                rodape TEXT        
+            )
+        ''')        
+
+        cursor.execute('INSERT OR REPLACE INTO parametro (instituicao, cabecalho1, cabecalho2, cabecalho3, rodape) VALUES (?, ?, ?, ?, ?)', (INSTITUICAO, CABECALHO1, CABECALHO2, CABECALHO3, RODAPE))
 
         path_campus = 'data/campus.csv'
         with open(path_campus, 'r', newline='', encoding='utf-8') as arquivo_csv:
