@@ -31,3 +31,17 @@
     visibility: visible;
     opacity: 1;
 }
+
+fieldset {
+    border:1px solid rgb(208, 208, 208); 
+    padding: 3px; 
+    border-radius: 5px; 
+    margin-bottom: 4px;
+    margin-top: 20px;
+    border: 1px dotted #cacaca;
+
+}
+
+fieldset label {
+    margin-top: 8px;
+}

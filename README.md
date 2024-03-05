@@ -7,6 +7,7 @@
     2.4 Flask
     2.5 pdf2image
     2.6 poppler
+    2.7 Make
 ## 3 INSTALAÇÃO no linux/ubuntu
 ### 3.1 - msttcorefonts    
     echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | sudo debconf-set-selections
@@ -26,13 +27,20 @@
 
 # 6 - SUBINDO COM DOCKER   
     clone do projeto
-    make build
-    make run
+    make up   
 
 # 7 - ACESSANDO
     localhost:5000
 
-## 8 - VERSÕES
+# 8 - USUÁRIO PADRÃO
+    username: admin
+    password: admin
+
+## 9 - VERSÕES
     - Versão 1.0.0 : Projeto Inicial
 
+## 10 - EXTRAS
+    - alterar a senha de login no arquivo e executa novamente o migrate:
+        /migrations/1_inicial.py 
+    
 

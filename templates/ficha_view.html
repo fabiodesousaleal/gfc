@@ -61,7 +61,7 @@
                             <span class="info-icon">                            
                                 <i class="fas fa-info-circle" style="font-size: 10;"></i>                               
                                 <span class="tooltip-text">                                   
-                                    a) Reproduzir igual como aparece no documento;
+                                        Reproduzir igual como aparece no documento;
                                         OBS: Regras gramaticais apenas a primeira palavra, inicial em maiúscula (exceção dos nomes
                                         próprios);
                                         Exemplos: <span style="color:darkgreen;">Vistas e costumes da cidade e arredores de Palmas, em 1992-2000.</span>
@@ -154,43 +154,59 @@
                 <div class="card">
                     <h4 class="text-left"><i class="fas fa-chalkboard-teacher section-icon"></i> Passo 4 - Dados dos Orientadores</h4>
                     <div class="form-group">
-
-                        <label for="orientador-nome">                            
-                            Orientador - Nome:                            
-                            <span class="info-icon">                            
-                                <i class="fas fa-info-circle" style="font-size: 10;"></i>                               
-                                <span class="tooltip-text">
-                                    Digite o nome do seu orientador e
-                                    nomes/sobrenomes intermediários, se for o caso. Apenas as primeiras letras iniciais em maiúsculo.
-                                    Exemplo: para o nome José Bento Renato Monteiro Lobato, usar <span style="color:darkgreen;">José Bento Renato Monteiro </span>                      
-                                </span> 
-                            <b style="color: red;">*</b>
-                        
-                        </label>
-                        <input type="text" class="form-control" name="orientador-nome" id="orientador-nome" placeholder="Digite o nome do orientador" required maxlength="50">
-                        
-                        <label for="orientador-sobrenome">
-                            Orientador - Sobrenome:                                                       
-                            <span class="info-icon">                            
-                                <i class="fas fa-info-circle" style="font-size: 10;"></i>                               
-                                <span class="tooltip-text">
-                                    Sobrenome do orientador: digite o último sobrenome do orientador. Atenção: assinale a caixa
-                                    “orientadora”, se for o caso, para que o programa faça a distinção da forma feminina ao designar
-                                    essa função no corpo da ficha catalográfica.
-                                    Siga as orientações dadas para último sobrenome do autor.                                    
-                                    Exemplo: para o nome José Bento Renato Monteiro Lobato, usar <span style="color:darkgreen;">Lobato</span> 
-                                </span>
+                        <fieldset>
+                                                  
+                            <label for="orientador-nome">                            
+                                Orientador - Nome:                            
+                                <span class="info-icon">                            
+                                    <i class="fas fa-info-circle" style="font-size: 10;"></i>                               
+                                    <span class="tooltip-text">
+                                        Digite o nome do seu orientador e
+                                        nomes/sobrenomes intermediários, se for o caso. Apenas as primeiras letras iniciais em maiúsculo.
+                                        Exemplo: para o nome José Bento Renato Monteiro Lobato, usar <span style="color:darkgreen;">José Bento Renato Monteiro </span>                      
+                                    </span> 
+                                <b style="color: red;">*</b>
                             
-                            <b style="color: red;">*</b> 
-                        </label>
+                            </label>
+                            <input type="text" class="form-control" name="orientador-nome" id="orientador-nome" placeholder="Digite o nome do orientador" required maxlength="50">
+                            
+                            <label for="orientador-sobrenome">
+                                Orientador - Sobrenome:                                                       
+                                <span class="info-icon">                            
+                                    <i class="fas fa-info-circle" style="font-size: 10;"></i>                               
+                                    <span class="tooltip-text">
+                                        Sobrenome do orientador: digite o último sobrenome do orientador. Atenção: assinale a caixa
+                                        “orientadora”, se for o caso, para que o programa faça a distinção da forma feminina ao designar
+                                        essa função no corpo da ficha catalográfica.
+                                        Siga as orientações dadas para último sobrenome do autor.                                    
+                                        Exemplo: para o nome José Bento Renato Monteiro Lobato, usar <span style="color:darkgreen;">Lobato</span> 
+                                    </span>
+                                
+                                <b style="color: red;">*</b> 
+                            </label>
 
-                        <input type="text" class="form-control" name="orientador-sobrenome" id="orientador-sobrenome" placeholder="Digite o sobrenome do orientador" required maxlength="100">
+                            <input type="text" class="form-control" name="orientador-sobrenome" id="orientador-sobrenome" placeholder="Digite o sobrenome do orientador" required maxlength="100">
+                            
+                            <label for="orientador-feminino">Orientador - Genêro Feminino</label>
+                            <input id="orientador-feminino" name="orientador-feminino" type="checkbox" value="False">
+                            </fieldset>
+                            
+                            <fieldset>                                
                         
                         <label for="corientador-nome">Coorientador - Nome:</label>                        
                         <input type="text" class="form-control" name="coorientador-nome" id="coorientador-nome" placeholder="Digite o nome do coorientador" maxlength="50">
                         
                         <label for="coorientador-sobrenome">Coorientador - Sobrenome:</label>
                         <input type="text" class="form-control" name="coorientador-sobrenome" id="coorientador-sobrenome" placeholder="Digite o sobrenome do coorientador" maxlength="100">
+                        
+                        <label for="coorientador-feminino">Coorientador - Gênero Feminino</label>
+                        <input id="coorientador-feminino" name="coorientador-feminino" type="checkbox" value="True">
+
+
+                        </fieldset>     
+                        </fieldset>
+                        
+                        
                     </div>
                     <!-- Adicione mais campos conforme necessário para a seção de Dados dos Orientadores -->
                 </div>

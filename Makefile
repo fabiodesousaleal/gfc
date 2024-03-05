@@ -1,4 +1,4 @@
-.PHONY: build run start stop restart remove help logs migrate
+.PHONY: build run start stop restart remove help logs migrate createuser
 IMAGE_NAME = fabiodesousaleal/gfc:v1.3.1
 CONTAINER_NAME = gfc_app
 HOST_PATH = $(shell pwd)
@@ -14,7 +14,8 @@ help:
 	@echo "  make remove      Remove o contêiner"
 	@echo "  make help        Exibe as opções disponíveis de ajuda"
 	@echo "  make logs        Visualiza os logs da aplicação"
-	@echo "  make migrate        Visualiza os logs da aplicação"
+	@echo "  make migrate     Visualiza os logs da aplicação"
+
 
 
 build:

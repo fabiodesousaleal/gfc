@@ -19,7 +19,8 @@ class FichaModel:
                  tipo_fonte,
                  tipo_arquivo,
                  orientador_nome,
-                 orientador_sobrenome,                 
+                 orientador_sobrenome,
+                 orientador_feminino,                 
                  assunto1,
                  assunto2,
                  assunto3,
@@ -27,6 +28,7 @@ class FichaModel:
                  tipo_trabalho: TipoTrabalhoModel,
                  coorientador_nome=None,
                  coorientador_sobrenome=None,
+                 coorientador_feminino = None,
                  titulo_subtitulo=None,
                    ) -> None:
         self.parametro = parametro
@@ -42,8 +44,10 @@ class FichaModel:
         self.tipo_arquivo = tipo_arquivo
         self.orientador_nome = orientador_nome
         self.orientador_sobrenome = orientador_sobrenome
+        self.orintador_feminino = orientador_feminino
         self.coorientador_nome = coorientador_nome
         self.coorientador_sobrenome = coorientador_sobrenome
+        self.coorientador_feminino = coorientador_feminino
         self.assunto1 = assunto1
         self.assunto2 = assunto2
         self.assunto3 = assunto3
@@ -72,8 +76,17 @@ class FichaModel:
 
         paragrafo3 = f'{self.folhas} f.'
         paragrafo4 = f'{self.tipo_trabalho} ({self.curso.tipo} - {self.curso.nome}) --{self.parametro.instituicao}, {self.ano}.' 
+        
         paragrafo5 = f'Orientador: {self.orientador_nome} {self.orientador_sobrenome}.'
+
+        if self.orintador_feminino:
+            paragrafo5 = f'Orientadora: {self.orientador_nome} {self.orientador_sobrenome}.'
+        
         paragrafo6 = f'Coorientador: {self.coorientador_nome} {self.coorientador_sobrenome}.'
+        
+        if self.coorientador_feminino:
+            paragrafo6 = f'Coorientadora: {self.coorientador_nome} {self.coorientador_sobrenome}.'
+        
         paragrafo7 = f'{assuntos}'       
         paragrafos = {
             1: paragrafo1,
