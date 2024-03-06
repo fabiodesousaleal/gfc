@@ -1,6 +1,5 @@
 from flask import Flask, Blueprint, redirect
 from flask_login import LoginManager, login_required
-
 from routes.ficha_routes import ficha_routes
 from routes.login_routes import login_routes
 from routes.curso_routes import curso_routes
@@ -8,13 +7,18 @@ from routes.tipo_trabalho_routes import tt_routes
 from routes.campus_routes import campus_routes
 from routes.parametro_routes import parametro_routes
 from models.user_model import UserModel
+from utils.utils import criar_login
+from dotenv import load_dotenv
+import os
 
-
+load_dotenv()
 
 app = Flask(__name__)
+
 login_manager = LoginManager(app)
 
-app.config['SECRET_KEY'] = 'universidadefederaldonortedotocantins'
+app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
+
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -35,6 +39,9 @@ login_manager.login_view = 'login_routes.home'
 @app.route('/')
 def index():
     return redirect('/ficha/', code=302)
+
+def createuser(user, password):
+    criar_login(user, password)
 
 if __name__ == "__main__":
     app.run(debug=True, host='0.0.0.0', port=5000)

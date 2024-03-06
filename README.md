@@ -5,9 +5,11 @@
     2.2 Reportlab
     2.3 pacote de fontes msttcorefonts
     2.4 Flask
+    2.4.1 Flask-login
     2.5 pdf2image
     2.6 poppler
     2.7 Make
+    2.8 python-dotenv
 ## 3 INSTALAÇÃO no linux/ubuntu
 ### 3.1 - msttcorefonts    
     echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | sudo debconf-set-selections
@@ -26,20 +28,17 @@
     localhost:5000
 
 # 6 - SUBINDO COM DOCKER   
-    clone do projeto
-    make up   
+    1 - clonar o projeto
+    2 - make up 
+    3 - make createuser (para criar um usuário)  
 
 # 7 - ACESSANDO
     localhost:5000
 
-# 8 - USUÁRIO PADRÃO
-    username: admin
-    password: admin
-
-## 9 - VERSÕES
+# 8 - VERSÕES
     - Versão 1.0.0 : Projeto Inicial
 
-## 10 - EXTRAS
+# 9 - EXTRAS
     - alterar a senha de login no arquivo e executa novamente o migrate:
         /migrations/1_inicial.py 
     

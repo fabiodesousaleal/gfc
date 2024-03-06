@@ -44,7 +44,7 @@ class FichaModel:
         self.tipo_arquivo = tipo_arquivo
         self.orientador_nome = orientador_nome
         self.orientador_sobrenome = orientador_sobrenome
-        self.orintador_feminino = orientador_feminino
+        self.orientador_feminino = orientador_feminino
         self.coorientador_nome = coorientador_nome
         self.coorientador_sobrenome = coorientador_sobrenome
         self.coorientador_feminino = coorientador_feminino
@@ -79,7 +79,7 @@ class FichaModel:
         
         paragrafo5 = f'Orientador: {self.orientador_nome} {self.orientador_sobrenome}.'
 
-        if self.orintador_feminino:
+        if self.orientador_feminino:
             paragrafo5 = f'Orientadora: {self.orientador_nome} {self.orientador_sobrenome}.'
         
         paragrafo6 = f'Coorientador: {self.coorientador_nome} {self.coorientador_sobrenome}.'

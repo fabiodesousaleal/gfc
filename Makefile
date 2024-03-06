@@ -1,5 +1,5 @@
 .PHONY: build run start stop restart remove help logs migrate createuser
-IMAGE_NAME = fabiodesousaleal/gfc:v1.3.1
+IMAGE_NAME = fabiodesousaleal/gfc:v1.4.1
 CONTAINER_NAME = gfc_app
 HOST_PATH = $(shell pwd)
 
@@ -15,7 +15,7 @@ help:
 	@echo "  make help        Exibe as opções disponíveis de ajuda"
 	@echo "  make logs        Visualiza os logs da aplicação"
 	@echo "  make migrate     Visualiza os logs da aplicação"
-
+	@echo "  make createuser  Cria um usuário"
 
 
 build:
@@ -42,3 +42,8 @@ migrate:
 	python3.11 migrations/1_inicial.py && echo "Migrações realizadas com sucesso!"
 
 up: build run migrate
+
+createuser:force
+	docker exec -it $(CONTAINER_NAME) bash -c 'read -p "Digite o nome de usuário:" usuario; read -p "Digite a senha: " senha; python -c "from app import createuser; createuser(\"$${usuario}\", \"$${senha}\")"'
+
+force:

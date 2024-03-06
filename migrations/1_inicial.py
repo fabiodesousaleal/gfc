@@ -1,5 +1,4 @@
 import sqlite3
-from werkzeug.security import generate_password_hash
 import csv
 
 DEFAULT_ADMIN = 'admin'
@@ -102,11 +101,7 @@ def create_table():
             leitor_csv = csv.reader(arquivo_csv, delimiter=',')
             for linha in leitor_csv:        
                 nome = linha[0]           
-                cursor.execute('INSERT OR REPLACE INTO tipo_trabalho (nome, ativo) VALUES (?, ?)', (nome, 1))
-            
-        
-        hashed_password = generate_password_hash(DEFAULT_PASSWORD, method='pbkdf2:sha256')
-        cursor.execute('INSERT OR REPLACE INTO user (username, password, ativo) VALUES (?, ?, ?)', (DEFAULT_ADMIN, hashed_password, 1))
+                cursor.execute('INSERT OR REPLACE INTO tipo_trabalho (nome, ativo) VALUES (?, ?)', (nome, 1))       
         
         conn.commit()
         conn.close()        
