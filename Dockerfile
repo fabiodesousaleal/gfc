@@ -2,7 +2,7 @@ FROM ubuntu:latest
 
 WORKDIR /app
 
-COPY requirements.txt .
+COPY . .
 
 RUN apt update -y && apt install -y python3.11 python3.11-venv python3-pip 
 
