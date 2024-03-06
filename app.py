@@ -17,7 +17,7 @@ app = Flask(__name__)
 
 login_manager = LoginManager(app)
 
-app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
+app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', 'asdçlkskasdbbidkjçadkj56çlkjsdlçk326362324gsh467s')
 
 
 @login_manager.user_loader
