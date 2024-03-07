@@ -1,6 +1,6 @@
 .PHONY: build run start stop restart remove help logs migrate createuser
-IMAGE_NAME = fabiodesousaleal/gfc_app:v1.5
-CONTAINER_NAME = ficha_catalog_app
+IMAGE_NAME = fabiodesousaleal/gfc:v1.6
+CONTAINER_NAME = ficha_app
 HOST_PATH = $(shell pwd)
 
 help:
