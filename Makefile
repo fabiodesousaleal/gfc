@@ -39,9 +39,10 @@ logs:
 	docker logs -f $(CONTAINER_NAME)
 
 migrate:
-	python3.11 migrations/1_inicial.py && echo "Migrações realizadas com sucesso!"
+	docker exec $(CONTAINER_NAME) python3.11 migrations/1_inicial.py && echo "Migrações realizadas com sucesso!"
 
-up: build run migrate
+
+up: build run migrate createuser
 
 createuser:force
 	docker exec -it $(CONTAINER_NAME) bash -c 'read -p "Digite o nome de usuário:" usuario; read -p "Digite a senha: " senha; python -c "from app import createuser; createuser(\"$${usuario}\", \"$${senha}\")"'
