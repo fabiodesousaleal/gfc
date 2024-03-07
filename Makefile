@@ -5,7 +5,7 @@ HOST_PATH = $(shell pwd)
 
 help:
 	@echo "Usage:"
-	@echo "  make up       	  Faz o build e controi a Imagem"
+	@echo "  make up       	  Executa: build - run - migrate - createuser"
 	@echo "  make build       Constrói a imagem Docker"
 	@echo "  make run         Inicializa um contêiner"
 	@echo "  make start       Inicia um contêiner parado"
@@ -14,7 +14,7 @@ help:
 	@echo "  make remove      Remove o contêiner"
 	@echo "  make help        Exibe as opções disponíveis de ajuda"
 	@echo "  make logs        Visualiza os logs da aplicação"
-	@echo "  make migrate     Visualiza os logs da aplicação"
+	@echo "  make migrate     Faz o migrate dos dados iniciais"
 	@echo "  make createuser  Cria um usuário"
 
 
