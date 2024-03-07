@@ -21,25 +21,18 @@
     pip install pdf2image
 ### 3.4 - poppler
     pip install poppler-utils
-## 4 - Iniciar o flask
+### 4 - Iniciar o flask
     python3 app.py
 
-# 5 - ACESSANDO
+### 5 - ACESSANDO
     localhost:5000
 
-# 6 - SUBINDO COM DOCKER   
+## 6 - SUBINDO COM DOCKER   
     1 - clonar o projeto
-    2 - make up 
-    3 - make createuser (para criar um usuário)  
+    2 - make up  
 
-# 7 - ACESSANDO
+### 7 - ACESSANDO
     localhost:5000
 
-# 8 - VERSÕES
+## 8 - VERSÕES
     - Versão 1.0.0 : Projeto Inicial
-
-# 9 - EXTRAS
-    - alterar a senha de login no arquivo e executa novamente o migrate:
-        /migrations/1_inicial.py 
-    
-
