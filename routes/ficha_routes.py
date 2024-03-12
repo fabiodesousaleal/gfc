@@ -82,7 +82,7 @@ def definir_estilo_paragrafos(fonte_nome)->dict:
         alignment=4,  
         fontName=fonte_nome,
         fontSize=FONTE_SIZE,
-        firstLineIndent=28.35        
+        firstLineIndent=14.17,        
     )
 
     a_esquerda = ParagraphStyle(
@@ -130,13 +130,16 @@ def gerar_ficha():
         orientador_feminino=dados.get('orientador-feminino', False),       
         assunto1=dados['assunto1'],
         assunto2=dados['assunto2'],
-        assunto3=dados['assunto3'],
-        assunto4=dados['assunto4'],
+        assunto3=dados['assunto3'],   
         coorientador_nome=dados['coorientador-nome'],
         coorientador_sobrenome=dados['coorientador-sobrenome'],
         coorientador_feminino=dados.get('coorientador-feminino', False),
         tipo_trabalho=tipo_trabalho.nome,
         titulo_subtitulo=dados["titulo-subtitulo"],
+        autor2_nome=dados["autor2-nome"],
+        autor2_sobrenome=dados["autor2-sobrenome"],
+        autor3_nome=dados["autor3-nome"], 
+        autor3_sobrenome=dados["autor3-sobrenome"],
     )
 
     tipo_arquivo=dados['tipo-arquivo']

@@ -11,44 +11,100 @@
 
 <div class="container">    
     <div class="subtitulo">
-        <span>Gerador de Ficha Catalográfica - GFC</span>
+        <img src="/static/assets/img/Logo.jpg">
         <hr style="width: 50%;">        
     </div>
     <form action="/ficha/gerar_ficha" method="post">
         <div class="row">
             <div class="col-md-6">
                 <div class="card">
-                    <h4 class="text-left"><i class="fas fa-user section-icon"></i>Passo 1 - Autor</h4>
+                    <h4 class="text-left"><i class="fas fa-user section-icon"></i>Passo 1 - Autores</h4>
                     <div class="form-group">
-                        
-                        <label for="autor-nome">
-                            Autor - Nome: 
-                            <span class="info-icon">                            
-                                <i class="fas fa-info-circle" style="font-size: 10;"></i> 
-                                <b style="color: red;">*</b>
-                                <span class="tooltip-text">
-                                    Exemplo: 
-                                    para o nome <span style="color:black;">Manuel Carneiro de Sousa Bandeira </span> usar <i style="color:darkgreen;">Manuel Carneiro de Sousa</i></span>
-                            </span>
-                        </label><br>
-                        
-                        
-                        <input class="form-control" type="text" id="autor-sobrenome" name="autor-nome" value="" placeholder="Nome" required maxlength="50"><br>
-                
-                        <label for="autor-sobrenome">
+                        <fieldset>
+                            <legend> Autor Principal </legend>
+                            <label for="autor-nome">
+                                Nome: 
+                                <span class="info-icon">                            
+                                    <i class="fas fa-info-circle" style="font-size: 10;"></i> 
+                                    <b style="color: red;">*</b>
+                                    <span class="tooltip-text">
+                                        Exemplo: 
+                                        para o nome <span style="color:black;">Manuel Carneiro de Sousa Bandeira </span> usar <i style="color:darkgreen;">Manuel Carneiro de Sousa</i></span>
+                                </span>
+                            </label><br>                       
+                            
+                            <input class="form-control" type="text" id="autor-sobrenome" name="autor-nome" value="" placeholder="Nome" required maxlength="50"><br>
+                    
+                            <label for="autor-sobrenome">
+    
+                                Sobrenome:
+                                <span class="info-icon">                            
+                                    <i class="fas fa-info-circle" style="font-size: 10;"></i>                               
+                                    <span class="tooltip-text">Exemplo:
+                                        para o nome 
+                                        <span style="color:black;">Manuel Carneiro de Sousa Bandeira </span> usar <i style="color:darkgreen;">Bandeira</i></span>
+                                </span>
+                                 <b style="color: red;">*</b>
+    
+                            </label>
+                                <input class="form-control" type="text" id="autor-sobrenome" name="autor-sobrenome" value="" placeholder="Sobrenome" required maxlength="100"><br>
 
-                            Autor - Sobrenome:
-                            <span class="info-icon">                            
-                                <i class="fas fa-info-circle" style="font-size: 10;"></i>                               
-                                <span class="tooltip-text">Exemplo:
-                                    para o nome 
-                                    <span style="color:black;">Manuel Carneiro de Sousa Bandeira </span> usar <i style="color:darkgreen;">Bandeira</i></span>
-                            </span>
-                             <b style="color: red;">*</b>
+                        </fieldset>
+                        
+                        <div id="div-mais-autor">
+                            <fieldset>
+                                <legend> Outro Autor - Opcional </legend>
+                                <label for="autor2-nome">    
+                                    Nome:
+                                    <span class="info-icon">                            
+                                        <i class="fas fa-info-circle" style="font-size: 10;"></i>                               
+                                        <span class="tooltip-text">
+                                            Informar o nome                                         
+                                    </span>                                     
+                                </label>
+                                
+                                    <input class="form-control" type="text" id="autor2-nome" name="autor2-nome" value="" placeholder="Nome"  maxlength="100"><br>
 
-                        </label><br>
+                                <label for="autor2-sobrenome">    
+                                    Sobrenome:
+                                    <span class="info-icon">                            
+                                        <i class="fas fa-info-circle" style="font-size: 10;"></i>                               
+                                        <span class="tooltip-text">
+                                            Informar o sobrenome                                         
+                                    </span>
+                                            
+                                </label>
+                                    <input class="form-control" type="text" id="autor2-sobrenome" name="autor2-sobrenome" value="" placeholder="Sobrenome"  maxlength="100"><br>
+                            
+                            </fieldset>
+                            <fieldset>
+                                <legend> Outro Autor - Opcional </legend>
+                                <label for="autor3-nome">    
+                                    Nome:
+                                    <span class="info-icon">                            
+                                        <i class="fas fa-info-circle" style="font-size: 10;"></i>                               
+                                        <span class="tooltip-text">
+                                            Informar o nome                                         
+                                    </span>                                     
+                                </label>
+                                
+                                    <input class="form-control" type="text" id="autor3-nome" name="autor3-nome" value="" placeholder="Nome"  maxlength="100"><br>
 
-                        <input class="form-control" type="text" id="autor-sobrenome" name="autor-sobrenome" value="" placeholder="Sobrenome" required maxlength="100"><br>
+                                <label for="autor3-sobrenome">    
+                                    Sobrenome:
+                                    <span class="info-icon">                            
+                                        <i class="fas fa-info-circle" style="font-size: 10;"></i>                               
+                                        <span class="tooltip-text">
+                                            Informar o sobrenome                                         
+                                    </span>
+                                            
+                                </label>
+                                    <input class="form-control" type="text" id="autor3-sobrenome" name="autor3-sobrenome" value="" placeholder="Nome Completo do Autor"  maxlength="100"><br>
+                            
+                            </fieldset>  
+                    </div>
+                        <br>
+
                     </div>
                     <!-- Adicione mais campos conforme necessário para a seção de Dados Pessoais -->
                 </div>
@@ -56,74 +112,79 @@
                 <div class="card">
                     <h4 class="text-left"><i class="fas fa-file section-icon"></i> Passo 2 - Dados do Trabalho</h4>
                     <div class="form-group">
-                        <label for="titulo-trabalho">
-                            Titulo do Trabalho:
-                            <span class="info-icon">                            
-                                <i class="fas fa-info-circle" style="font-size: 10;"></i>                               
-                                <span class="tooltip-text">                                   
-                                        Reproduzir igual como aparece no documento;
-                                        OBS: Regras gramaticais apenas a primeira palavra, inicial em maiúscula (exceção dos nomes
-                                        próprios);
-                                        Exemplos: <span style="color:darkgreen;">Vistas e costumes da cidade e arredores de Palmas, em 1992-2000.</span>
+                        <fieldset>
+                            <legend>Dados do Trabalho </legend>
+                            <label for="titulo-trabalho">
+                                Titulo do Trabalho:
+                                <span class="info-icon">                            
+                                    <i class="fas fa-info-circle" style="font-size: 10;"></i>                               
+                                    <span class="tooltip-text">                                   
+                                            Reproduzir igual como aparece no documento;
+                                            OBS: Regras gramaticais apenas a primeira palavra, inicial em maiúscula (exceção dos nomes
+                                            próprios);
+                                            Exemplos: <span style="color:darkgreen;">Vistas e costumes da cidade e arredores de Palmas, em 1992-2000.</span>
+                                
+                                    </span>
+                                <b style="color: red;">*</b>
                             
-                                </span>
-                             <b style="color: red;">*</b>
-                        
-                        </label><br>
-                        <input class="form-control" type="text" id="titulo-trabalho" name="titulo-trabalho" value="" placeholder="Título do Trabalho" required maxlength="255"><br>
+                            </label><br>
+                            <input class="form-control" type="text" id="titulo-trabalho" name="titulo-trabalho" value="" placeholder="Título do Trabalho" required maxlength="255"><br>
 
-                        <label for="titulo-subtitulo">
-                            Subtitulo do Trabalho:
-                            <span class="info-icon">                            
-                                <i class="fas fa-info-circle" style="font-size: 10;"></i>                               
-                                <span class="tooltip-text">
-                                    a) Reproduzido tal como aparece no documento;
-                                    b) Iniciais em minúsculo (exceção dos nomes próprios);
-                                    Exemplo: <span style="color:darkgreen;"> diálogos com poetas latino-americanos entrevistas</span>
+                            <label for="titulo-subtitulo">
+                                Subtitulo do Trabalho:
+                                <span class="info-icon">                            
+                                    <i class="fas fa-info-circle" style="font-size: 10;"></i>                               
+                                    <span class="tooltip-text">
+                                        a) Reproduzido tal como aparece no documento;
+                                        b) Iniciais em minúsculo (exceção dos nomes próprios);
+                                        Exemplo: <span style="color:darkgreen;"> diálogos com poetas latino-americanos entrevistas</span>
+                                
+                                    </span>                            
                             
-                                </span>                            
-                        
-                        </label><br>
-                        <input class="form-control" type="text" id="titulo-subtitulo" name="titulo-subtitulo" placeholder="Subtitulo do Trabalho" value="" maxlength="255"><br>
-                        
-                        <label for="folhas">Folhas: <b style="color: red;">*</b></label><br>
-                        <input class="form-control" type="number" min="1" max="999" maxlength="3" id="folhas" name="folhas" class="form-control">
-                        
-                        <label for="campus">Campus: <b style="color: red;">*</b></label><br>
-                        <select id="campus" name="campus" required="required" class=" form-control" >
-                        </option>
-                            <option value="" selected="selected">---- Selecione o campus ----</option>  
-                            {% for camp in campus %}
-                            <option value="{{ camp.id }}">{{ camp.nome }}</option>
-                            {% endfor %}
-                        </select>
-                        <label for="curso">Curso: <b style="color: red;">*</b></label>
-                        <select id="curso" name="curso" required="required" class="form-control" >
-                           <option value="" selected>---- Selecione o curso ---- </option>
-                        </select>
-
-                        <label for="tipo-trabalho">Tipo Trabalho: <b style="color: red;">*</b></label>
-                        <select id="tipo-trabalho" name="tipo-trabalho" required="required" class=" form-control">
-                            <option value="" selected="selected">--- Selecione o tipo de trabalho ---</option>
-                            {% for tipo in tipos_trabalho %}
-                                <option value="{{ tipo.id }}">{{ tipo.nome }}</option>
-                            {% endfor %}                           
-                        </select>
-
-                        <label for="ano">Ano: <b style="color: red;">*</b></label>        
-                        <select id="ano" name="ano" class="form-control" required>                        
-                            <option value="">--- Selecione o Ano ---</option>
+                            </label><br>
+                            <input class="form-control" type="text" id="titulo-subtitulo" name="titulo-subtitulo" placeholder="Subtitulo do Trabalho" value="" maxlength="255"><br>
                             
-                        </select>
+                            <label for="folhas">Folhas: <b style="color: red;">*</b></label><br>
+                            <input class="form-control" type="number" min="1" max="999" maxlength="3" id="folhas" name="folhas" class="form-control">
+                            
+                            <label for="campus">Campus: <b style="color: red;">*</b></label><br>
+                            <select id="campus" name="campus" required="required" class=" form-control" >
+                            </option>
+                                <option value="" selected="selected">---- Selecione o campus ----</option>  
+                                {% for camp in campus %}
+                                <option value="{{ camp.id }}">{{ camp.nome }}</option>
+                                {% endfor %}
+                            </select>
+                            <label for="curso">Curso: <b style="color: red;">*</b></label>
+                            <select id="curso" name="curso" required="required" class="form-control" >
+                            <option value="" selected>---- Selecione o curso ---- </option>
+                            </select>
+
+                            <label for="tipo-trabalho">Tipo Trabalho: <b style="color: red;">*</b></label>
+                            <select id="tipo-trabalho" name="tipo-trabalho" required="required" class=" form-control">
+                                <option value="" selected="selected">--- Selecione o tipo de trabalho ---</option>
+                                {% for tipo in tipos_trabalho %}
+                                    <option value="{{ tipo.id }}">{{ tipo.nome }}</option>
+                                {% endfor %}                           
+                            </select>
+
+                            <label for="ano">Ano: <b style="color: red;">*</b></label>        
+                            <select id="ano" name="ano" class="form-control" required>                        
+                                <option value="">--- Selecione o Ano ---</option>
+                                
+                            </select>
+                        </fieldset>
                     </div>              
                 </div>
                 <div class="card">
-                    <h4 class="text-left"><i class="fas fa-chalkboard-teacher section-icon"></i> Passo 3 - Assuntos: </h4>                        
+                    <h4 class="text-left"><i class="fas fa-chalkboard-teacher section-icon"></i> Passo 3 - Assuntos </h4>                        
                                                        
                        
                         
                     
-                    <div class="form-group">                        
+                    <div class="form-group"> 
+                        <fieldset>
+                            <legend> Assuntos </legend>                       
                         <label for="assunto1">
                             Assunto 1:  
                             <span class="info-icon">                            
@@ -142,9 +203,7 @@
                         <label for="assunto3">Assunto 3: <b style="color: red;">*</b></label>
                         <input type="text" class="form-control" name="assunto3" id="assunto3" placeholder="Digite o assunto 3" maxlength="255">
 
-                        <label for="assunto4">Assunto 4: <b style="color: red;">*</b></label>
-                        <input type="text" class="form-control" name="assunto4" id="assunto4" placeholder="Digite o assunto 4" maxlength="255">
-
+                    </fieldset>
                     </div>
                     <!-- Adicione mais campos conforme necessário para a seção de Dados dos Orientadores -->
                 </div>
@@ -155,6 +214,7 @@
                     <h4 class="text-left"><i class="fas fa-chalkboard-teacher section-icon"></i> Passo 4 - Dados dos Orientadores</h4>
                     <div class="form-group">
                         <fieldset>
+                            <legend> Orientador </legend>
                                                   
                             <label for="orientador-nome">                            
                                 Orientador - Nome:                            
@@ -192,7 +252,7 @@
                             </fieldset>
                             
                             <fieldset>                                
-                        
+                                <legend>Coorientador</legend>
                         <label for="corientador-nome">Coorientador - Nome:</label>                        
                         <input type="text" class="form-control" name="coorientador-nome" id="coorientador-nome" placeholder="Digite o nome do coorientador" maxlength="50">
                         
@@ -203,8 +263,7 @@
                         <input id="coorientador-feminino" name="coorientador-feminino" type="checkbox" value="True">
 
 
-                        </fieldset>     
-                        </fieldset>
+                        </fieldset>                     
                         
                         
                     </div>
@@ -212,36 +271,40 @@
                 </div>
 
                 <div class="card">
-                    <h4 class="text-left"><i class="fas fa-stream section-icon"></i></i>Passo 5 - Configuração da Ficha</h4>
-                    <div class="form-group">                        
-                        <label for="tipo-arquivo">Tipo Fonte:</label><br>
+                    <h4 class="text-left"><i class="fas fa-stream section-icon"></i></i>Passo 5 - Configuração e Download</h4>
+                    <div class="form-group"> 
+                        <fieldset>
+                            <legend> Configuração da Ficha </legend>                       
+                            <label for="tipo-arquivo">Tipo Fonte:</label><br>
 
-                        <input type="radio" id="tipo-fonte-arial" name="tipo-fonte" value="Arial" checked>
+                            <input type="radio" id="tipo-fonte-arial" name="tipo-fonte" value="Arial" checked>
 
-                        <label for="tipo-fonte-arial" style="font-weight:normal;">Arial</label><br>
+                            <label for="tipo-fonte-arial" style="font-weight:normal;">Arial</label><br>
 
-                        <input type="radio" id="tipo-fonte-times" name="tipo-fonte" value="Times New Roman">
+                            <input type="radio" id="tipo-fonte-times" name="tipo-fonte" value="Times New Roman">
 
-                        <label for="tipo-fonte-times" style="font-weight:normal;">Times New Roman</label><br>
+                            <label for="tipo-fonte-times" style="font-weight:normal;">Times New Roman</label><br>
 
-                        <label for="tipo-arquivo">Tipo Arquivo:</label><br>
-                        
-                        <input type="radio" id="tipo-arquivo-img" name="tipo-arquivo" value="img">
+                            <label for="tipo-arquivo">Tipo Arquivo:</label><br>
+                            
+                            <input type="radio" id="tipo-arquivo-img" name="tipo-arquivo" value="img">
 
-                        <label for="tipo-arquivo-img" style="font-weight:normal;">Imagem</label><br>
-                        
-                        <input type="radio" id="tipo-arquivo-pdf" name="tipo-arquivo" value="pdf" checked>
-                        <label for="tipo-arquivo-pdf" style="font-weight:normal;">PDF</label><br>                           
+                            <label for="tipo-arquivo-img" style="font-weight:normal;">Imagem</label><br>
+                            
+                            <input type="radio" id="tipo-arquivo-pdf" name="tipo-arquivo" value="pdf" checked>
+                            <label for="tipo-arquivo-pdf" style="font-weight:normal;">PDF</label><br>   
+                            </fieldset>
+                            
+                            <fieldset>
+                                <legend>Download</legend>
+                                <h6 class="text-left">Clique no botão abaixo para fazer o Download</h6>
+                                <div class="form-group">                        
+                                    <button type="submit" class="btn btn-primary"><i class="fas fa-file-alt section-icon"></i></i>DOWNLOAD</button>                       
+                                </div>                                
+                            </fieldset>
                     </div>
-                    <!-- Adicione mais campos conforme necessário para a seção de Dados da Saída de Arquivo -->
-                </div>                
-                <div class="card">
-                    <h4 class="text-left"><i class="fas fa-chalkboard-teacher section-icon"></i> Passo 6 - Impressão</h4>
-                    <div class="form-group">                        
-                        <button type="submit" class="btn btn-primary"><i class="fas fa-file-alt section-icon"></i></i>Gerar Ficha</button>                       
-                    </div>
-                    <!-- Adicione mais campos conforme necessário para a seção de Dados dos Orientadores -->
-                </div>
+                </div>               
+                
             </div>
         </div>        
     </form>
@@ -279,7 +342,6 @@
         .catch(error => console.error("Erro ao obter cursos: ", error));
     });
 
-
     
         document.addEventListener('DOMContentLoaded', function () {
             // Obter o ano atual
@@ -295,8 +357,9 @@
                 option.text = ano;
                 selectAno.add(option);
             }
-        });
-    
+        });    
+
+   
 </script>
 
 {% endblock %}

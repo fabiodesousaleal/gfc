@@ -36,6 +36,7 @@
 
 ## 5 VERSÕES 
     - Versão 1.0.0 : Projeto Inicial
+    - Versão 1.0.1 : Altera logo, e layout do app
 
 ## 6 DETALHES
     - Usar o comando make help para ver as opções disponiveis
