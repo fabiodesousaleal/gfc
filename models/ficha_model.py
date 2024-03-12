@@ -84,20 +84,20 @@ class FichaModel:
         assuntos = f'1. {self.assunto1}. 2. {self.assunto2}. 3. {self.assunto3}.'
 
         if self.autor2_nome:
-            assuntos = f'{assuntos} I. {self.autor_sobrenome}, {self.autor_nome}. II. {self.autor2_sobrenome}, {self.autor2_nome}.' 
+            assuntos = f'{assuntos} I. {self.autor2_sobrenome}, {self.autor2_nome}.' 
             autores = f'{autores}, {self.autor2_nome} {self.autor2_sobrenome}'   
         if self.autor2_nome and not self.autor3_nome:
-            assuntos = f'{assuntos} III. Título'
+            assuntos = f'{assuntos} II. Título'
 
         if self.autor2_nome and self.autor3_nome:
-            assuntos = f'{assuntos} III. {self.autor3_sobrenome}, {self.autor2_nome}. IV. Título.' 
+            assuntos = f'{assuntos} II. {self.autor3_sobrenome}, {self.autor3_nome}. III. Título.' 
             autores = f'{autores}, {self.autor3_nome} {self.autor3_sobrenome}'     
         
         # CONSTRUINDO PARAGRAFO 2                        
-        paragrafo2 = f'{self.titulo_trabalho}: {self.titulo_subtitulo} / {autores} - {self.campus}, TO, {self.ano}.'
+        paragrafo2 = f'{self.titulo_trabalho}: {self.titulo_subtitulo} / {autores}. - {self.campus}, TO, {self.ano}.'
         
         if not self.titulo_subtitulo:
-            paragrafo2 = f'{self.titulo_trabalho}. / {autor_nome_completo}. - {self.campus}, TO, {self.ano}.'       
+            paragrafo2 = f'{self.titulo_trabalho} / {autor_nome_completo}. - {self.campus}, TO, {self.ano}.'       
 
         #CONSTRUINDO PARAGRAFO 3 e 4
         paragrafo3 = f'{self.folhas} f.'

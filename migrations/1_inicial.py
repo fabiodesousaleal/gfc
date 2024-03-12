@@ -113,4 +113,21 @@ def create_table():
     finally:
         conn.close()
 
-create_table()
+
+import sqlite3
+
+def verifica_migrate(): 
+    conexao = sqlite3.connect("data/gfc.db") 
+    cursor = conexao.cursor()  
+    cursor.execute("SELECT name FROM sqlite_master WHERE type='table';")    
+    tabela_existe = cursor.fetchone() is not None
+    conexao.close()    
+    return tabela_existe
+
+if not verifica_migrate():
+    create_table()
+
+else:
+    print("O migrate Inicial já foi realizado! não é possivel repetir essa ação!")
+
+

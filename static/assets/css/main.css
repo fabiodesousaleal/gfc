@@ -117,3 +117,6 @@ footer {
 .login-form button:hover {
     background-color: #0056b3;
 }
+a:hover{
+    font-weight: bold;
+}
