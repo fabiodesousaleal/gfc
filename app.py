@@ -18,7 +18,7 @@ app = Flask(__name__)
 
 login_manager = LoginManager(app)
 
-app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', 'asdçlkskasdbbidkjçadkj56çlkjsdlçk326362324gsh467s')
+app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', 'naproduçãoporfavorvocedevecriaroarquivoenv')
 
 
 @login_manager.user_loader
@@ -45,4 +45,4 @@ def createuser(user, password):
     criar_login(user, password)
 
 if __name__ == "__main__":
-    app.run(debug=True, host='0.0.0.0', port=5000)
+    app.run(debug=False, host='0.0.0.0', port=5000)
