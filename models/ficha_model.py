@@ -18,15 +18,13 @@ class FichaModel:
                  ano,
                  tipo_fonte,
                  tipo_arquivo,
-                 orientador_nome,
-                 orientador_sobrenome,
+                 orientador_nome,             
                  orientador_feminino,                 
                  assunto1,
                  assunto2,
                  assunto3,
                  tipo_trabalho: TipoTrabalhoModel,
-                 coorientador_nome=None,
-                 coorientador_sobrenome=None,
+                 coorientador_nome=None,            
                  coorientador_feminino = None,
                  titulo_subtitulo=None,
                  autor2_nome=None,
@@ -45,11 +43,9 @@ class FichaModel:
         self.ano = ano
         self.tipo_fonte = tipo_fonte
         self.tipo_arquivo = tipo_arquivo
-        self.orientador_nome = orientador_nome
-        self.orientador_sobrenome = orientador_sobrenome
+        self.orientador_nome = orientador_nome      
         self.orientador_feminino = orientador_feminino
-        self.coorientador_nome = coorientador_nome
-        self.coorientador_sobrenome = coorientador_sobrenome
+        self.coorientador_nome = coorientador_nome    
         self.coorientador_feminino = coorientador_feminino
         self.assunto1 = assunto1
         self.assunto2 = assunto2
@@ -68,10 +64,7 @@ class FichaModel:
     #def get_codigo_cdd(self, autor_curso):
     def get_paragrafos(self):
 
-        autor_nome_completo = f'{self.autor_nome} {self.autor_sobrenome}' 
-        orientador = f'{self.orientador_sobrenome}, {self.orientador_nome}'
-        coorientador = f'{self.coorientador_sobrenome}, {self.coorientador_nome}'
-        orientadores = f'I. {orientador}, orient. II. {coorientador},  Título.'
+        autor_nome_completo = f'{self.autor_nome} {self.autor_sobrenome}'          
 
         autores = autor_nome_completo
 
@@ -104,15 +97,15 @@ class FichaModel:
         paragrafo4 = f'{self.tipo_trabalho} ({self.curso.tipo} - {self.curso.nome}) -- {self.parametro.instituicao}, {self.ano}.'
         
         #CONSTRUINDO PARAGRAFO 5  e 6   
-        paragrafo5 = f'Orientador: {self.orientador_nome} {self.orientador_sobrenome}.'
+        paragrafo5 = f'Orientador: {self.orientador_nome}.'
 
         if self.orientador_feminino:
-            paragrafo5 = f'Orientadora: {self.orientador_nome} {self.orientador_sobrenome}.'
+            paragrafo5 = f'Orientadora: {self.orientador_nome}.'
         
-        paragrafo6 = f'Coorientador: {self.coorientador_nome} {self.coorientador_sobrenome}.'
+        paragrafo6 = f'Coorientador: {self.coorientador_nome}.'
         
         if self.coorientador_feminino:
-            paragrafo6 = f'Coorientadora: {self.coorientador_nome} {self.coorientador_sobrenome}.'
+            paragrafo6 = f'Coorientadora: {self.coorientador_nome}.'
         
         
         #CONSTRUINDO PARAGRAFO 7
