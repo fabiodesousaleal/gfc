@@ -67,3 +67,16 @@ input.form-control, select.form-control {
 input.form-control:focus, select.form-control:focus {
     background-color: #dff1f2;
 }
+
+.btn-limpa-form {
+    display: flex; 
+    justify-content: flex-end;
+    
+}
+
+.reset-ficha {
+    color: #9999;
+}
+.reset-ficha :hover {
+   color: #8b181866;
+}
